@@ -1,8 +1,3 @@
-/*
- * GestionFichierTexteTest.java                   23/04/2024
- * IUT de Rodez, pas de copyright
- */
-
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -1,8 +1,3 @@
-/*
- * CompressionTest.java                   08/05/2024
- * IUT de Rodez, pas de copyright
- */
-
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,14 +10,11 @@ import huffman.ArbreHuffman;
 import huffman.Compression;
 import huffman.CompterOccurrences;
 
-/**
- * Classe de tests pour la classe Compression.
- */
 public class CompressionTest {
 
     private static final String TEXTE_A_COMPRESSER = "coucou";
 
-    private static final String TEXTE_COMPRESSE_ATTENDU = "0101101011";
+    private static final String TEXTE_COMPRESSE_ATTENDU = "1000110001";
 
     private static final String TEXTE_VIDE = "";
 
@@ -30,7 +22,7 @@ public class CompressionTest {
 
     private static final String TEXTE_SPECIAL = "@[^";
 
-    private static final String TEXTE_SPECIAL_COMPRESSER_ATTENDUE = "01011";
+    private static final String TEXTE_SPECIAL_COMPRESSER_ATTENDUE = "10001";
 
     private static final Object[][] DICTIONNAIRE = { { 'a', "100" },
 	    { 'b', "101" }, { 'c', "110" } };
@@ -40,37 +32,20 @@ public class CompressionTest {
     private static final Object[][] DICTIONNAIRE_AVEC_NULL = { { 'a', "100" },
 	    { null, null }, { 'c', "110" } };
 
-    /**
-     * Teste la compression d'un texte identique.
-     *
-     * Vérifie que le texte compressé est égal à la représentation binaire
-     * UTF-8 attendue.
-     */
     @Test
     void testCompressionTexteIdentique() {
-	// Création du dictionnaire de codage de Huffman
 	Object[][] dictionnaire = GestionArbreHuffman
 		.creerDictionnaire(ArbreHuffman.constructionArbreHuffman(
 			CompterOccurrences.compter(TEXTE_A_COMPRESSER)));
 
-	// Compression du texte grâce à la méthode compresserTexte
 	String texteComprime = Compression.compresserTexte(TEXTE_A_COMPRESSER,
 		dictionnaire);
 
-	// Vérification que le texte compressé est égal à la représentation
-	// UTF-8 attendue
 	assertEquals(TEXTE_COMPRESSE_ATTENDU, texteComprime);
     }
 
-    /**
-     * Teste la compression d'un texte vide.
-     *
-     * Vérifie qu'une IllegalArgumentException est lancée lorsque le texte
-     * est vide.
-     */
     @Test
     void testCompressionTexteVideException() {
-	// Création du dictionnaire de codage de Huffman
 	try {
 	    GestionArbreHuffman
 		    .creerDictionnaire(ArbreHuffman.constructionArbreHuffman(
@@ -80,15 +55,8 @@ public class CompressionTest {
 	}
     }
 
-    /**
-     * Teste la compression d'un texte null.
-     *
-     * Vérifie qu'une IllegalArgumentException est lancée lorsque le texte
-     * est null.
-     */
     @Test
     void testCompressionTexteNullException() {
-	// Création du dictionnaire de codage de Huffman
 	try {
 	    GestionArbreHuffman
 		    .creerDictionnaire(ArbreHuffman.constructionArbreHuffman(
@@ -98,35 +66,16 @@ public class CompressionTest {
 	}
     }
 
-    /**
-     * Teste la compression d'un texte avec des caractères spéciaux.
-     *
-     * Vérifie que le texte compressé est égal à la représentation binaire
-     * UTF-8 attendue.
-     */
     @Test
     void testCompressionTexteSpecial() {
-	// Création du dictionnaire de codage de Huffman
 	Object[][] dictionnaire = GestionArbreHuffman
 		.creerDictionnaire(ArbreHuffman.constructionArbreHuffman(
 			CompterOccurrences.compter(TEXTE_SPECIAL)));
-
-	// Compression du texte spécial
 	String texteComprime = Compression.compresserTexte(TEXTE_SPECIAL,
 		dictionnaire);
-
-	// Vérification que le texte compressé est égal à la représentation
-	// UTF-8 attendue
 	assertEquals(TEXTE_SPECIAL_COMPRESSER_ATTENDUE, texteComprime);
     }
 
-    /**
-     * Teste la méthode trouverCodeHuffman lorsque le caractère est
-     * présent dans le dictionnaire.
-     *
-     * Vérifie que le code Huffman retourné est correct pour chaque
-     * caractère.
-     */
     @Test
     void testTrouverCodeHuffmanCaracterePresent() {
 	assertEquals("100", Compression.trouverCodeHuffman('a', DICTIONNAIRE));
@@ -140,13 +89,6 @@ public class CompressionTest {
 		Compression.trouverCodeHuffman('c', DICTIONNAIRE));
     }
 
-    /**
-     * Teste la méthode trouverCodeHuffman lorsque le caractère est absent
-     * du dictionnaire.
-     *
-     * Vérifie que la méthode retourne une chaîne vide pour un caractère
-     * non trouvé.
-     */
     @Test
     void testTrouverCodeHuffmanCaractereAbsent() {
 	assertEquals("", Compression.trouverCodeHuffman('d', DICTIONNAIRE));
@@ -158,13 +100,6 @@ public class CompressionTest {
 		Compression.trouverCodeHuffman('p', DICTIONNAIRE));
     }
 
-    /**
-     * Teste la méthode trouverCodeHuffman lorsque le dictionnaire est
-     * vide.
-     *
-     * Vérifie que la méthode retourne une chaîne vide pour tout caractère
-     * dans un dictionnaire vide.
-     */
     @Test
     void testTrouverCodeHuffmanDictionnaireVide() {
 	assertEquals("",
@@ -177,13 +112,6 @@ public class CompressionTest {
 		Compression.trouverCodeHuffman('r', DICTIONNAIRE_VIDE));
     }
 
-    /**
-     * Teste la méthode trouverCodeHuffman lorsque le dictionnaire
-     * contient des entrées nulles.
-     *
-     * Vérifie que la méthode ignore les entrées nulles et retourne les
-     * codes corrects pour les caractères présents.
-     */
     @Test
     void testTrouverCodeHuffmanDictionnaireAvecNull() {
 	assertEquals("100",

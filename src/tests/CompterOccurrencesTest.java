@@ -1,8 +1,3 @@
-/*
- * OccurrencesTest.java                   30/04/2024
- * IUT de Rodez, pas de copyright
- */
-
 package tests;
 
 import static org.junit.Assert.assertThrows;
@@ -12,14 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import huffman.CompterOccurrences;
 
-/**
- * Tests unitaires de la classe huffman.Occurrences pour vérifier le
- * comptage des occurrences de chaque caractère dans une chaîne de
- * texte.
- *
- * @author JulesVialas
- * @version 1.0
- */
 class CompterOccurrencesTest {
 
     private static final String[] TEXTE_NORMAL = {
@@ -28,15 +15,9 @@ class CompterOccurrencesTest {
 	    "J'irai par la foret, j'irai par la montagne.",
 	    "Je ne puis demeurer loin de toi plus longtemps.",
 	    "Je marcherai les yeux fixes sur mes pensees,",
-	    "Sans rien voir au dehors, sans entendre aucun bruit," // Victor
-	    // Hugo, Les
-	    // Contemplations,
-	    // 3
-	    // septembre
-	    // 1847
-	    , "Seul, inconnu, le dos courbe, les mains croisees," // sans les
-	    // accents
-	    , "Triste, et le jour pour moi sera comme la nuit.",
+	    "Sans rien voir au dehors, sans entendre aucun bruit,",
+	    "Seul, inconnu, le dos courbe, les mains croisees,",
+	    "Triste, et le jour pour moi sera comme la nuit.",
 	    "Je ne regarderai ni l'or du soir qui tombe,",
 	    "Ni les voiles au loin descendant vers Harfleur,",
 	    "Et quand j'arriverai, je mettrai sur ta tombe",
@@ -53,16 +34,10 @@ class CompterOccurrencesTest {
 
     private static final String CARACTERES_SIMILAIRES = "aaaaabbbbccc";
 
-    private static final String KATAKANAS_JAPONNAIS = "片仮名カタカナ"; // caractères
-    // katakana
-    // japonais
+    private static final String KATAKANAS_JAPONNAIS = "片仮名カタカナ";
 
     private static final String CARACTERES_CYRILLIQUES = "БГД";
 
-    /**
-     * Test unitaire pour vérifier le comptage des occurrences de chaque
-     * caractère dans un texte normal.
-     */
     @Test
     public void testCompterOccurencesTexteNormal() {
 
@@ -74,10 +49,6 @@ class CompterOccurrencesTest {
 	}
     }
 
-    /**
-     * Test unitaire pour vérifier le comptage des occurrences de chaque
-     * caractère dans un texte vide.
-     */
     @Test
     public static void testCompterOccurencesTexteVide() {
 	try {
@@ -89,10 +60,6 @@ class CompterOccurrencesTest {
 	}
     }
 
-    /**
-     * Test unitaire pour vérifier le comportement lorsque le texte est
-     * null.
-     */
     @Test
     public void testCompterOccurencesTexteNull() {
 	assertThrows(IllegalArgumentException.class, () -> {
@@ -100,30 +67,18 @@ class CompterOccurrencesTest {
 	});
     }
 
-    /**
-     * Test unitaire pour vérifier le comptage des occurrences de chaque
-     * caractère dans un texte contenant des caractères spéciaux.
-     */
     @Test
     public void testCompterOccurencesAvecCaracteresSpeciaux() {
 	Object[][] resultat = CompterOccurrences.compter(CARACTERES_SPECIAUX);
-	assertEquals(9, resultat.length); // Vérifier la longueur du tableau de
-	// résultats
+	assertEquals(9, resultat.length);
     }
 
-    /**
-     * Test unitaire pour vérifier le comptage des occurrences de chaque
-     * caractère dans un texte contenant des caractères similaires.
-     */
     @Test
     public void testCompterOccurencesAvecCaracteresSimilaires() {
 	Object[][] resultat = CompterOccurrences.compter(CARACTERES_SIMILAIRES);
-	assertEquals(3, resultat.length); // Vérifier la longueur du tableau de
-	// résultats
-	assertEquals('c', resultat[0][0]); // Vérifier le premier caractère
-	assertEquals(0.25, resultat[0][1]); // Vérifier le nombre d'occurrences
-	// du
-	// premier caractère
+	assertEquals(3, resultat.length);
+	assertEquals('c', resultat[0][0]);
+	assertEquals(0.25, resultat[0][1]);
     }
 
     @Test
@@ -142,6 +97,5 @@ class CompterOccurrencesTest {
 	} catch (IllegalArgumentException erreur) {
 	    System.out.print(erreur.getMessage());
 	}
-
     }
 }

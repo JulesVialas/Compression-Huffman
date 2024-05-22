@@ -12,17 +12,13 @@ import huffman.Noeud;
 
 class ArbreHuffmanTest {
 
-    private static final Object[][] OCCURRENCES = CompterOccurrences
-	    .compter("Bonjour a tous");
+    private static final Object[][] OCCURRENCES = CompterOccurrences.compter("Bonjour a tous");
 
-    private static final Object[][] UNE_OCCURRENCE = CompterOccurrences
-	    .compter("aaaaa");
+    private static final Object[][] UNE_OCCURRENCE = CompterOccurrences.compter("aaaaa");
 
-    private static final Object[][] OCCURRENCES_NON_REPETEES = CompterOccurrences
-	    .compter("abcdefghij");
+    private static final Object[][] OCCURRENCES_NON_REPETEES = CompterOccurrences.compter("abcdefghij");
 
-    private static final Object[][] OCCURRENCES_EGALES = CompterOccurrences
-	    .compter("aabbccddee");
+    private static final Object[][] OCCURRENCES_EGALES = CompterOccurrences.compter("aabbccddee");
 
     @Test
     public void testConstructionArbreHuffmanAvecOccurrencesRepetees() {
@@ -44,8 +40,7 @@ class ArbreHuffmanTest {
 
     @Test
     public void testConstructionArbreHuffmanAvecOccurrencesNonRepetees() {
-	Noeud root4 = ArbreHuffman
-		.constructionArbreHuffman(OCCURRENCES_NON_REPETEES);
+	Noeud root4 = ArbreHuffman.constructionArbreHuffman(OCCURRENCES_NON_REPETEES);
 	assertNotNull(root4);
 	assertTrue(estArbreHuffmanValide(root4));
     }
@@ -62,11 +57,8 @@ class ArbreHuffmanTest {
 	    return true;
 	}
 	if (noeud.getGauche() != null && noeud.getDroite() != null) {
-	    return noeud
-		    .getFrequence() == (noeud.getGauche().getFrequence()
-			    + noeud.getDroite().getFrequence())
-		    && estArbreHuffmanValide(noeud.getGauche())
-		    && estArbreHuffmanValide(noeud.getDroite());
+	    return noeud.getFrequence() == (noeud.getGauche().getFrequence() + noeud.getDroite().getFrequence())
+		    && estArbreHuffmanValide(noeud.getGauche()) && estArbreHuffmanValide(noeud.getDroite());
 	}
 	return false;
     }

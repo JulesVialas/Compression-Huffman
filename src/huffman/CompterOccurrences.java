@@ -15,8 +15,7 @@ public class CompterOccurrences {
 	}
 	for (char caractere : texte.toCharArray()) {
 	    if (caractere > '\u007F' || caractere < '\u0000') {
-		throw new IllegalArgumentException(
-			"Le caractère n'est pas pris en charge");
+		throw new IllegalArgumentException("Le caractère n'est pas pris en charge");
 	    }
 	}
     }
@@ -59,8 +58,7 @@ public class CompterOccurrences {
 	for (int rang = 1; rang < tableau.length; rang++) {
 	    Object[] temp = tableau[rang];
 	    int secondRang = rang - 1;
-	    while (secondRang >= 0
-		    && (int) tableau[secondRang][1] >= (int) temp[1]) {
+	    while (secondRang >= 0 && (int) tableau[secondRang][1] >= (int) temp[1]) {
 		tableau[secondRang + 1] = tableau[secondRang];
 		secondRang--;
 	    }

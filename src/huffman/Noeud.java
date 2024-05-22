@@ -45,27 +45,21 @@ public class Noeud {
 
     @Override
     public String toString() {
-	return toString(this, 0);
+	StringBuilder sb = new StringBuilder();
+	toStringHelper(this, sb, 0);
+	return sb.toString();
     }
 
-    private String toString(Noeud noeud, int niveau) {
+    private void toStringHelper(Noeud noeud, StringBuilder sb, int level) {
 	if (noeud == null) {
-	    return "";
+	    return;
 	}
-	StringBuilder sb = new StringBuilder();
-	for (int i = 0; i < niveau; i++) {
-	    sb.append("   ");
+	for (int i = 0; i < level; i++) {
+	    sb.append("  ");
 	}
-	if (noeud.getCaractere() == '\n') {
-	    sb.append("↲ : ").append(noeud.getFrequence()).append("\n");
-	} else if (noeud.getCaractere() == ' ') {
-	    sb.append("␣ : ").append(noeud.getFrequence()).append("\n");
-	} else {
-	    sb.append(noeud.getCaractere()).append(" : ")
-		    .append(noeud.getFrequence()).append("\n");
-	}
-	sb.append(toString(noeud.getGauche(), niveau + 1));
-	sb.append(toString(noeud.getDroite(), niveau + 1));
-	return sb.toString();
+	sb.append(noeud.getCaractere() == '\n' ? "↲" : (noeud.getCaractere() == ' ' ? "␣" : noeud.getCaractere()));
+	sb.append(" : ").append(noeud.getFrequence()).append("\n");
+	toStringHelper(noeud.getGauche(), sb, level + 1);
+	toStringHelper(noeud.getDroite(), sb, level + 1);
     }
 }

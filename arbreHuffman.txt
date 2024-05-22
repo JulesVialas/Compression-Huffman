@@ -1,0 +1,4 @@
+codeHuffman = 00 ; frequence = 2 ; symbole = c
+codeHuffman = 01 ; frequence = 2 ; symbole = o
+codeHuffman = 10 ; frequence = 2 ; symbole = u
+codeHuffman = 11 ; frequence = 1 ; symbole = ↲

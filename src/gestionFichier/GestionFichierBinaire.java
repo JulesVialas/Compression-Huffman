@@ -9,8 +9,7 @@ import java.io.IOException;
 public class GestionFichierBinaire {
 
     public static String lecture(String nomFichier) throws IOException {
-	try (DataInputStream input = new DataInputStream(
-		new FileInputStream(nomFichier))) {
+	try (DataInputStream input = new DataInputStream(new FileInputStream(nomFichier))) {
 	    int longueurBinaire = input.readInt();
 	    StringBuilder stringBinaire = new StringBuilder();
 	    int byteLu;
@@ -18,8 +17,7 @@ public class GestionFichierBinaire {
 	    while ((byteLu = input.read()) != -1 && bitsLus < longueurBinaire) {
 		String byteString = byteVersStringBinaire(byteLu);
 		if (bitsLus + 8 > longueurBinaire) {
-		    byteString = byteString.substring(0,
-			    longueurBinaire - bitsLus);
+		    byteString = byteString.substring(0, longueurBinaire - bitsLus);
 		}
 		stringBinaire.append(byteString);
 		bitsLus += 8;
@@ -29,14 +27,11 @@ public class GestionFichierBinaire {
     }
 
     private static String byteVersStringBinaire(int octet) {
-	return String.format("%8s", Integer.toBinaryString(octet & 0xFF))
-		.replace(' ', '0');
+	return String.format("%8s", Integer.toBinaryString(octet & 0xFF)).replace(' ', '0');
     }
 
-    public static void ecriture(String stringBinaire, String nomFichier)
-	    throws IOException {
-	try (DataOutputStream output = new DataOutputStream(
-		new FileOutputStream(nomFichier))) {
+    public static void ecriture(String stringBinaire, String nomFichier) throws IOException {
+	try (DataOutputStream output = new DataOutputStream(new FileOutputStream(nomFichier))) {
 	    output.writeInt(stringBinaire.length());
 	    byte[] bytes = stringBinaireVersBytes(stringBinaire);
 	    output.write(bytes);

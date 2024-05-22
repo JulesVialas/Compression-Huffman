@@ -2,25 +2,16 @@ package huffman;
 
 import java.io.IOException;
 
-import gestionFichier.GestionDictionnaire;
 import gestionFichier.GestionFichierBinaire;
 
 public class Decompression {
 
-    public static String decompresser(String nomFichierCompresse,
-	    String nomFichierDictionnaire) {
+    public static String decompresser(String nomFichierCompresse, Object[][] dictionnaire) {
 	String texteDecompresse = "";
 	String texteBinaire = null;
 	String temp = "";
 	try {
 	    texteBinaire = GestionFichierBinaire.lecture(nomFichierCompresse);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-	Object[][] dictionnaire = null;
-	try {
-	    dictionnaire = GestionDictionnaire
-		    .reconstruireDictionnaire(nomFichierDictionnaire);
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}

@@ -10,8 +10,7 @@ public class GestionFichierTexte {
 
     public static String lireFichier(String cheminFichier) throws IOException {
 	StringBuilder contenuBuilder = new StringBuilder();
-	try (BufferedReader reader = new BufferedReader(
-		new FileReader(cheminFichier))) {
+	try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
 	    String ligne;
 	    while ((ligne = reader.readLine()) != null) {
 		contenuBuilder.append(ligne).append('\n');

@@ -15,8 +15,9 @@ public class Programme {
 
     public static void main(String[] args) {
 
-	System.out.println("Resultat de la lecture du fichier coucou.txt : \n");
-	String lecture = " ";
+	System.out.println("Résultat de la lecture du fichier coucou.txt : \n");
+	String lecture = "";
+	String arbreHuffman = "";
 	String nomFichier = "coucou";
 	try {
 	    lecture = GestionFichierTexte.lireFichier(nomFichier + ".txt");
@@ -38,20 +39,40 @@ public class Programme {
 	    System.out.println(caractere + " : " + element[1]);
 	}
 
-	System.out.println(
-		"\nResultat de la construction de l'arbre huffman : \n");
+	System.out.println("\nRésultat de la construction de l'arbre huffman : \n");
 	Noeud racine = ArbreHuffman.constructionArbreHuffman(occurrences);
 	System.out.println(racine.toString());
 
-	System.out.println("\nResultat de la compression de coucou.txt : \n");
-	Object[][] dictionnaire = GestionArbreHuffman.creerDictionnaire(racine);
-	String lectureCompresse = Compression.compresserTexte(lecture,
-		dictionnaire);
-	System.out.println(lectureCompresse + "\n");
-	System.out.println("Ecriture de coucou.bin : \n");
+	System.out.println("\nRésultat de la sauvegarde de l'arbre huffman : \n");
+	GestionArbreHuffman.sauvegardeArbreHuffman(racine, "arbreHuffman.txt");
 	try {
-	    GestionFichierBinaire.ecriture(lectureCompresse,
-		    nomFichier + ".bin");
+	    arbreHuffman = GestionFichierTexte.lireFichier("arbreHuffman.txt");
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+
+	System.out.print(arbreHuffman);
+	Object[][] arbreRestaure = null;
+
+	System.out.println("\nRésultat de la restauration de l'arbre huffman : \n");
+	try {
+	    arbreRestaure = GestionArbreHuffman.restaurerArborescenceHuffman("arbreHuffman.txt");
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+
+	for (Object[] element : arbreRestaure) {
+	    char caractere = (char) element[0];
+	    System.out.println(caractere + " : " + element[1]);
+	}
+
+	System.out.println("\nResultat de la compression de coucou.txt : \n");
+
+	String lectureCompresse = Compression.compresserTexte(lecture, arbreRestaure);
+	System.out.println(lectureCompresse + "\n");
+	System.out.println("Ecriture de coucou.bin ...\n");
+	try {
+	    GestionFichierBinaire.ecriture(lectureCompresse, nomFichier + ".bin");
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
@@ -65,9 +86,7 @@ public class Programme {
 	System.out.println(lectureBinaire + "\n");
 
 	System.out.println("Resultat de la decompression de coucou.bin : \n");
-	String coucouDecompresse = Decompression.decompresser("coucou.bin",
-		"dictionnaireHuffman.txt");
+	String coucouDecompresse = Decompression.decompresser("coucou.bin", arbreRestaure);
 	System.out.println(coucouDecompresse + "\n");
-
     }
 }

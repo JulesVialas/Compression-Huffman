@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import gestionFichier.GestionArbreHuffman;
 import huffman.Compression;
 
 public class CompressionTest {
@@ -18,53 +17,53 @@ public class CompressionTest {
 
     @Test
     void testCompressionTexteIdentique() {
-        String texteACompresser = "coucou";
-        String texteComprimeAttendu = "000110000110";
+	String texteACompresser = "coucou";
+	String texteComprimeAttendu = "000110000110";
 
-        String texteComprime = Compression.compresserTexte(texteACompresser, DICTIONNAIRE);
+	String texteComprime = Compression.compresserTexte(texteACompresser, DICTIONNAIRE);
 
-        assertEquals(texteComprimeAttendu, texteComprime);
+	assertEquals(texteComprimeAttendu, texteComprime);
     }
 
     @Test
     void testCompressionTexteVideException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Compression.compresserTexte("", DICTIONNAIRE);
-        });
+	assertThrows(IllegalArgumentException.class, () -> {
+	    Compression.compresserTexte("", DICTIONNAIRE);
+	});
     }
 
     @Test
     void testCompressionTexteNullException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Compression.compresserTexte(null, DICTIONNAIRE);
-        });
+	assertThrows(IllegalArgumentException.class, () -> {
+	    Compression.compresserTexte(null, DICTIONNAIRE);
+	});
     }
 
     @Test
     void testTrouverCodeHuffmanCaracterePresent() {
-        assertEquals("00", Compression.trouverCodeHuffman('c', DICTIONNAIRE));
-        assertEquals("01", Compression.trouverCodeHuffman('o', DICTIONNAIRE));
-        assertEquals("10", Compression.trouverCodeHuffman('u', DICTIONNAIRE));
+	assertEquals("00", Compression.trouverCodeHuffman('c', DICTIONNAIRE));
+	assertEquals("01", Compression.trouverCodeHuffman('o', DICTIONNAIRE));
+	assertEquals("10", Compression.trouverCodeHuffman('u', DICTIONNAIRE));
     }
 
     @Test
     void testTrouverCodeHuffmanCaractereAbsent() {
-        assertEquals("", Compression.trouverCodeHuffman('d', DICTIONNAIRE));
-        assertEquals("", Compression.trouverCodeHuffman('s', DICTIONNAIRE));
-        assertEquals("", Compression.trouverCodeHuffman('w', DICTIONNAIRE));
+	assertEquals("", Compression.trouverCodeHuffman('d', DICTIONNAIRE));
+	assertEquals("", Compression.trouverCodeHuffman('s', DICTIONNAIRE));
+	assertEquals("", Compression.trouverCodeHuffman('w', DICTIONNAIRE));
     }
 
     @Test
     void testTrouverCodeHuffmanDictionnaireVide() {
-        assertEquals("", Compression.trouverCodeHuffman('a', DICTIONNAIRE_VIDE));
-        assertEquals("", Compression.trouverCodeHuffman('f', DICTIONNAIRE_VIDE));
+	assertEquals("", Compression.trouverCodeHuffman('a', DICTIONNAIRE_VIDE));
+	assertEquals("", Compression.trouverCodeHuffman('f', DICTIONNAIRE_VIDE));
     }
 
     @Test
     void testTrouverCodeHuffmanDictionnaireAvecNull() {
-        assertEquals("100", Compression.trouverCodeHuffman('a', DICTIONNAIRE_AVEC_NULL));
-        assertEquals("110", Compression.trouverCodeHuffman('c', DICTIONNAIRE_AVEC_NULL));
-        assertEquals("", Compression.trouverCodeHuffman('b', DICTIONNAIRE_AVEC_NULL));
-        assertEquals("", Compression.trouverCodeHuffman('h', DICTIONNAIRE_AVEC_NULL));
+	assertEquals("100", Compression.trouverCodeHuffman('a', DICTIONNAIRE_AVEC_NULL));
+	assertEquals("110", Compression.trouverCodeHuffman('c', DICTIONNAIRE_AVEC_NULL));
+	assertEquals("", Compression.trouverCodeHuffman('b', DICTIONNAIRE_AVEC_NULL));
+	assertEquals("", Compression.trouverCodeHuffman('h', DICTIONNAIRE_AVEC_NULL));
     }
 }

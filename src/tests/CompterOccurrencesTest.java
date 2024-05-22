@@ -70,7 +70,7 @@ class CompterOccurrencesTest {
 	Object[][] resultat = CompterOccurrences.compter(CARACTERES_SIMILAIRES);
 	assertEquals(3, resultat.length);
 	assertEquals('c', resultat[0][0]);
-	assertEquals(0.25, resultat[0][1]);
+	assertEquals(3, resultat[0][1]);
     }
 
     @Test

@@ -15,7 +15,7 @@ public class Programme {
 
     public static void main(String[] args) {
 
-	System.out.println("Résultat de la lecture du fichier coucou.txt : \n");
+	System.out.println("Lecture du fichier coucou.txt ...\n");
 	String lecture = "";
 	String arbreHuffman = "";
 	String nomFichier = "coucou";
@@ -24,7 +24,6 @@ public class Programme {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-	System.out.println(lecture);
 
 	System.out.println("Résultat de compterOccurrences de coucou.txt : \n");
 	Object[][] occurrences = CompterOccurrences.compter(lecture);
@@ -39,11 +38,10 @@ public class Programme {
 	    System.out.println(caractere + " : " + element[1]);
 	}
 
-	System.out.println("\nRésultat de la construction de l'arbre huffman : \n");
+	System.out.println("\nConstruction de l'arbre huffman ...\n");
 	Noeud racine = ArbreHuffman.constructionArbreHuffman(occurrences);
-	System.out.println(racine.toString());
 
-	System.out.println("\nRésultat de la sauvegarde de l'arbre huffman : \n");
+	System.out.println("Résultat de la sauvegarde de l'arbre huffman : \n");
 	GestionArbreHuffman.sauvegardeArbreHuffman(racine, "arbreHuffman.txt");
 	try {
 	    arbreHuffman = GestionFichierTexte.lireFichier("arbreHuffman.txt");

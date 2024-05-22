@@ -1,4 +1,13 @@
-codeHuffman = 00 ; frequence = 2 ; symbole = c
-codeHuffman = 01 ; frequence = 2 ; symbole = o
-codeHuffman = 10 ; frequence = 2 ; symbole = u
-codeHuffman = 11 ; frequence = 1 ; symbole = ↲
+codeHuffman = 0000 ; frequence = 2 ; symbole = u
+codeHuffman = 00010 ; frequence = 1 ; symbole = t
+codeHuffman = 00011 ; frequence = 1 ; symbole = v
+codeHuffman = 0010 ; frequence = 2 ; symbole = a
+codeHuffman = 0011 ; frequence = 2 ; symbole = m
+codeHuffman = 010 ; frequence = 3 ; symbole = ␣
+codeHuffman = 011 ; frequence = 3 ; symbole = c
+codeHuffman = 100 ; frequence = 3 ; symbole = o
+codeHuffman = 101 ; frequence = 2 ; symbole = ↲
+codeHuffman = 1100 ; frequence = 1 ; symbole = e
+codeHuffman = 1101 ; frequence = 1 ; symbole = n
+codeHuffman = 1110 ; frequence = 1 ; symbole = ?
+codeHuffman = 1111 ; frequence = 1 ; symbole = C

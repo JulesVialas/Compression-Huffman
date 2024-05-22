@@ -42,24 +42,4 @@ public class Noeud {
     public void setDroite(Noeud droite) {
 	this.droite = droite;
     }
-
-    @Override
-    public String toString() {
-	StringBuilder sb = new StringBuilder();
-	toStringHelper(this, sb, 0);
-	return sb.toString();
-    }
-
-    private void toStringHelper(Noeud noeud, StringBuilder sb, int level) {
-	if (noeud == null) {
-	    return;
-	}
-	for (int i = 0; i < level; i++) {
-	    sb.append("  ");
-	}
-	sb.append(noeud.getCaractere() == '\n' ? "↲" : (noeud.getCaractere() == ' ' ? "␣" : noeud.getCaractere()));
-	sb.append(" : ").append(noeud.getFrequence()).append("\n");
-	toStringHelper(noeud.getGauche(), sb, level + 1);
-	toStringHelper(noeud.getDroite(), sb, level + 1);
-    }
 }

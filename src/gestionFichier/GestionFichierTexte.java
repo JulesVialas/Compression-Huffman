@@ -12,8 +12,13 @@ public class GestionFichierTexte {
 	StringBuilder contenuBuilder = new StringBuilder();
 	try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
 	    String ligne;
+	    boolean isFirstLine = true;
 	    while ((ligne = reader.readLine()) != null) {
-		contenuBuilder.append(ligne).append('\n');
+		if (!isFirstLine) {
+		    contenuBuilder.append('\n');
+		}
+		contenuBuilder.append(ligne);
+		isFirstLine = false;
 	    }
 	}
 	return contenuBuilder.toString();

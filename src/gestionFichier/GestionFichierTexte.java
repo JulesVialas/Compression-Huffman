@@ -31,7 +31,7 @@ public class GestionFichierTexte {
 		new FileReader(cheminFichier))) {
 	    String ligne;
 	    while ((ligne = reader.readLine()) != null) {
-		contenuBuilder.append(ligne).append("\n");
+		contenuBuilder.append(ligne).append('\n');
 	    }
 	}
 	return contenuBuilder.toString();

@@ -9,7 +9,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import huffman.ArbreHuffman;
 import huffman.ArbreHuffman.Noeud;
 
 /**
@@ -105,20 +104,5 @@ public class GestionArbreHuffman {
 
 	return racine;
 
-    }
-
-    public static void main(String[] args) {
-	// Construire l'arbre de Huffman à partir des occurrences
-	Object[][] occurrences = { { 'a', 5 }, { 'b', 9 }, { 'c', 12 },
-		{ 'd', 45 }, { 'e', 45 }, { 'f', 45 } };
-	Noeud racine = ArbreHuffman.constructionArbreHuffman(occurrences);
-
-	// Sauvegarder l'arbre de Huffman dans un fichier texte
-	sauvegardeArbreHuffman(racine, "arbreHuffman.txt");
-
-	Object[][] dictionnaire = creerDictionnaire(racine);
-	for (Object[] element : dictionnaire) {
-	    System.out.println(element[0] + " : " + element[1]);
-	}
     }
 }

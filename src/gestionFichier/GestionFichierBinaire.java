@@ -96,26 +96,4 @@ public class GestionFichierBinaire {
 	}
 	return bytes;
     }
-
-    public static void main(String[] args) {
-	try {
-	    // Exemple d'utilisation
-	    String fichierTexte = "coucou.txt";
-	    String fichierBinaire = "coucou.bin";
-
-	    // Exemple de chaîne binaire à écrire (représentant "coucou" encodé
-	    // avec
-	    // Huffman)
-	    String stringBinaire = "0111000100010111110010";
-	    ecriture(stringBinaire, fichierBinaire);
-
-	    // Lecture du fichier binaire et affichage du résultat
-	    String stringBinaireLue = lecture(fichierBinaire);
-	    System.out.println("Resultat de la lecture de " + fichierBinaire
-		    + " : " + stringBinaireLue);
-
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-    }
 }

@@ -7,7 +7,6 @@ package huffman;
 
 import java.io.IOException;
 
-import gestionFichier.GestionArbreHuffman;
 import gestionFichier.GestionFichierBinaire;
 import gestionFichier.GestionFichierTexte;
 
@@ -28,7 +27,6 @@ public class Compression {
      */
     public static String compresserTexte(String texte,
 	    Object[][] dictionnaire) {
-	String tableauTailles = "";
 	String tableauHuffman = "";
 	if (texte == null || texte.isEmpty()) {
 	    throw new IllegalArgumentException("Le texte est vide ou null");
@@ -37,7 +35,6 @@ public class Compression {
 	for (int rang = 0; rang < texte.length(); rang++) {
 	    char caractere = texte.charAt(rang);
 	    String codeHuffman = trouverCodeHuffman(caractere, dictionnaire);
-	    tableauTailles += codeHuffman.length();
 	    codeBinaire.append(codeHuffman);
 	}
 	for (Object[] element : dictionnaire) {
@@ -45,8 +42,6 @@ public class Compression {
 	}
 	GestionFichierTexte.ecrireFichier((tableauHuffman),
 		"dictionnaireHuffman.txt");
-	GestionFichierTexte.ecrireFichier((tableauTailles),
-		"dictionnaireTaille.txt");
 	try {
 	    GestionFichierBinaire.ecriture(codeBinaire.toString(),
 		    "texteCompresse.bin");
@@ -74,30 +69,5 @@ public class Compression {
 	    }
 	}
 	return "";
-    }
-
-    public static void main(String[] args) {
-	String texte = "coucou";
-	try {
-	    // Compter les occurrences des caractères dans le texte
-	    Object[][] occurrences = CompterOccurrences.compter(texte);
-
-	    // Construire l'arbre de Huffman à partir des occurrences
-	    ArbreHuffman.Noeud racine = ArbreHuffman
-		    .constructionArbreHuffman(occurrences);
-
-	    // Créer un dictionnaire de codage de Huffman à partir de l'arbre
-	    Object[][] dictionnaire = GestionArbreHuffman
-		    .creerDictionnaire(racine);
-
-	    // Compresser le texte en utilisant le dictionnaire
-	    String texteComprime = Compression.compresserTexte(texte,
-		    dictionnaire);
-
-	    // Afficher le texte compressé
-	    System.out.println("Texte compressé : " + texteComprime);
-	} catch (IllegalArgumentException e) {
-	    System.err.println("Erreur: " + e.getMessage());
-	}
     }
 }

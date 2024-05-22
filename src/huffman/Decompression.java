@@ -1,3 +1,8 @@
+/*
+ * Decompression.java				22/05/2024
+ * IUT de Rodez, pas de copyright
+ */
+
 package huffman;
 
 import java.io.IOException;
@@ -6,90 +11,50 @@ import gestionFichier.GestionDictionnaire;
 import gestionFichier.GestionFichierBinaire;
 
 /**
- * Cette classe fournit des méthodes pour décompresser un fichier
- * binaire encodé avec l'algorithme de compression de Huffman. Elle
- * utilise un dictionnaire et un tableau de tailles de caractères pour
- * reconstruire le texte original à partir du code binaire compressé.
+ * La décompression permet de proposer à l'utilisateur de pouvoir
+ * décompresser un fichier compressé
+ * 
+ * @author Jules Vialas
  */
+
 public class Decompression {
 
     /**
-     * Décompresse un fichier binaire encodé avec l'algorithme de Huffman.
-     *
-     * @param nomFichier Le nom du fichier binaire à décompresser.
-     * @return Le texte décompressé, ou {@code null} en cas d'erreur.
+     * Le fichier compressé est lu et analysé pour reconstruire les
+     * différents caractères à partir d'un dictionnaire contenant dans une
+     * colonne les caractères et dans l'autre le code huffman qui leur est
+     * propre
+     * 
+     * @param nomFichierCompresse
+     * @param nomFichierDictionnaire
+     * @return une String contenant le contenu du fichier décompressé .
      */
-    public static String decompresser(String nomFichier) {
+    public static String decompresser(String nomFichierCompresse,
+	    String nomFichierDictionnaire) {
+	String texteDecompresse = "";
+	String texteBinaire = null;
+	String temp = "";
+	try {
+	    texteBinaire = GestionFichierBinaire.lecture(nomFichierCompresse);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
 	Object[][] dictionnaire = null;
-	int[] tailleCaractere = null;
 	try {
 	    dictionnaire = GestionDictionnaire
-		    .reconstruireDictionnaire("dictionnaireHuffman.txt");
-	    tailleCaractere = GestionDictionnaire
-		    .reconstruireTableauTailles("dictionnaireTaille.txt");
+		    .reconstruireDictionnaire(nomFichierDictionnaire);
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-
-	if (dictionnaire == null || tailleCaractere == null) {
-	    System.err.println(
-		    "Erreur : Impossible de reconstruire le dictionnaire ou le tableau des tailles.");
-	    return null;
-	}
-
-	StringBuilder codeBinaire = new StringBuilder();
-	try {
-	    codeBinaire.append(GestionFichierBinaire.lecture(nomFichier));
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-
-	StringBuilder texteDecomprime = new StringBuilder();
-	int index = 0;
-	while (index < codeBinaire.length()) {
-	    boolean matchFound = false;
-	    for (int taille : tailleCaractere) {
-		if (index + taille <= codeBinaire.length()) {
-		    String sousChaine = codeBinaire.substring(index,
-			    index + taille);
-		    for (Object[] ligne : dictionnaire) {
-			if (ligne != null && ligne.length >= 2
-				&& ligne[1] != null
-				&& ligne[1].equals(sousChaine)) {
-			    texteDecomprime.append(ligne[0]);
-			    index += taille;
-			    matchFound = true;
-			    break;
-			}
-		    }
-		    if (matchFound) {
-			break;
-		    }
+	for (int rang = 0; rang < texteBinaire.length(); rang++) {
+	    temp += texteBinaire.charAt(rang);
+	    for (int rang2 = 0; rang2 < dictionnaire.length; rang2++) {
+		if (temp.equals(dictionnaire[rang2][1])) {
+		    texteDecompresse += dictionnaire[rang2][0];
+		    temp = "";
 		}
 	    }
-	    if (!matchFound) {
-		System.err.println(
-			"Erreur : Aucun match trouvé pour la séquence binaire à l'index "
-				+ index);
-		break;
-	    }
 	}
-
-	return texteDecomprime.toString();
-    }
-
-    /**
-     * Méthode principale pour tester la décompression d'un fichier.
-     *
-     * @param args Les arguments de la ligne de commande (non utilisés
-     *             ici).
-     */
-    public static void main(String[] args) {
-	String texteDecomprime = decompresser("coucou.bin");
-	if (texteDecomprime != null) {
-	    System.out.println("Texte décompressé : " + texteDecomprime);
-	} else {
-	    System.err.println("Erreur lors de la décompression du fichier.");
-	}
+	return texteDecompresse;
     }
 }

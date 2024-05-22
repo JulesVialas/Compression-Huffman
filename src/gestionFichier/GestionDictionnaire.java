@@ -110,27 +110,4 @@ public class GestionDictionnaire {
 	}
 	return nombreLignes;
     }
-
-    public static void main(String[] args) {
-	try {
-	    Object[][] dictionnaire = reconstruireDictionnaire(
-		    "dictionnaireHuffman.txt");
-	    int[] tableauTailles = reconstruireTableauTailles(
-		    "dictionnaireTaille.txt");
-
-	    // Afficher le dictionnaire de Huffman reconstruit
-	    System.out.println("Dictionnaire de Huffman : ");
-	    for (Object[] entree : dictionnaire) {
-		System.out.println(entree[0] + " : " + entree[1]);
-	    }
-
-	    // Afficher le tableau de tailles reconstruit
-	    System.out.println("Tableau de tailles : ");
-	    for (int taille : tableauTailles) {
-		System.out.println(taille);
-	    }
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-    }
 }

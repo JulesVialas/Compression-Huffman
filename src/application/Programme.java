@@ -30,12 +30,21 @@ public class Programme {
 	System.out.println("Résultat de compterOccurrences de coucou.txt : \n");
 	Object[][] occurrences = CompterOccurrences.compter(lecture);
 	for (Object[] element : occurrences) {
-	    System.out.println(element[0] + " : " + element[1]);
+	    char caractere = (char) element[0];
+	    if (caractere == '\n') {
+		caractere = '↲';
+	    }
+	    if (caractere == ' ') {
+		caractere = '␣';
+	    }
+	    System.out.println(caractere + " : " + element[1]);
 	}
 
 	System.out.println(
 		"\nResultat de la construction de l'arbre huffman : \n");
 	Noeud racine = ArbreHuffman.constructionArbreHuffman(occurrences);
+	System.out.println(
+		"\nResultat de la construction de l'arbre huffman : \n");
 	if (racine == null) {
 	    System.out.println("L'arbre est vide.");
 	    return;
@@ -44,11 +53,19 @@ public class Programme {
 	queue.offer(racine);
 	while (!queue.isEmpty()) {
 	    int tailleNiveau = queue.size();
+	    StringBuilder ligne = new StringBuilder();
 	    for (int i = 0; i < tailleNiveau; i++) {
 		Noeud noeud = queue.poll();
-		System.out.print(
-			noeud.caractere + " : " + noeud.frequence + "   ");
-
+		if (noeud.caractere == '\n') {
+		    ligne.append("↲").append(" : ").append(noeud.frequence)
+			    .append("   ");
+		} else if (noeud.caractere == ' ') {
+		    ligne.append("␣").append(" : ").append(noeud.frequence)
+			    .append("   ");
+		} else {
+		    ligne.append(noeud.caractere).append(" : ")
+			    .append(noeud.frequence).append("   ");
+		}
 		if (noeud.gauche != null) {
 		    queue.offer(noeud.gauche);
 		}
@@ -56,7 +73,7 @@ public class Programme {
 		    queue.offer(noeud.droite);
 		}
 	    }
-	    System.out.println();
+	    System.out.println(ligne.toString());
 	}
 
 	System.out.println("\nResultat de la compression de coucou.txt : \n");
@@ -64,7 +81,7 @@ public class Programme {
 	String lectureCompresse = Compression.compresserTexte(lecture,
 		dictionnaire);
 	System.out.println(lectureCompresse + "\n");
-
+	System.out.println("Taux de compression : "  + lectureCompresse.length()/ lecture.length());
 	System.out.println("Ecriture de coucou.bin : \n");
 	try {
 	    GestionFichierBinaire.ecriture(lectureCompresse,
@@ -83,7 +100,8 @@ public class Programme {
 	System.out.println(lectureBinaire + "\n");
 
 	System.out.println("Resultat de la decompression de coucou.bin : \n");
-	String coucouDecompresse = Decompression.decompresser("coucou.bin");
+	String coucouDecompresse = Decompression.decompresser("coucou.bin",
+		"dictionnaireHuffman.txt");
 	System.out.println(coucouDecompresse + "\n");
     }
 }

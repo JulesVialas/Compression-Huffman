@@ -15,15 +15,14 @@ public class Noeud {
 	return caractere;
     }
 
-
     public int getFrequence() {
 	return frequence;
     }
 
     public Noeud getGauche() {
 	return gauche;
-    }    
-    
+    }
+
     public void setGauche(Noeud gauche) {
 	this.gauche = gauche;
     }

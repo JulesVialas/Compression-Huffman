@@ -20,7 +20,8 @@ public class GestionArbreHuffman {
 	}
     }
 
-    private static void parcourirArbreHuffman(Noeud noeud, BufferedWriter contenuFichier, String codeHuffman) throws IOException {
+    private static void parcourirArbreHuffman(Noeud noeud, BufferedWriter contenuFichier, String codeHuffman)
+	    throws IOException {
 	if (noeud == null) {
 	    return;
 	}
@@ -32,8 +33,8 @@ public class GestionArbreHuffman {
 		contenuFichier.write(
 			"codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence() + " ; symbole = ␣\n");
 	    } else {
-		contenuFichier.write("codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence() + " ; symbole = "
-			+ noeud.getCaractere() + "\n");
+		contenuFichier.write("codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence()
+			+ " ; symbole = " + noeud.getCaractere() + "\n");
 	    }
 	}
 	parcourirArbreHuffman(noeud.getGauche(), contenuFichier, codeHuffman + "0");

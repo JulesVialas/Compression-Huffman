@@ -1,3 +1,7 @@
+/*
+ * CompterOccurrencesTest.java                                            22 avril 2024
+ * IUT de Rodez, pas de copyright.
+ */
 package tests;
 
 import static org.junit.Assert.assertThrows;

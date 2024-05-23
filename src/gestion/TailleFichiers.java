@@ -8,8 +8,10 @@ public class TailleFichiers {
 	File tailleFichierCompresse = new File(fichierCompresse);
 	double tailleFichierEnKiloBytes = tailleFichier.length() / 1024.0;
 	double tailleFichierCompresseEnKiloBytes = tailleFichierCompresse.length() / 1024.0;
-	System.out.println(tailleFichierEnKiloBytes + " ko");
-	System.out.println(tailleFichierCompresseEnKiloBytes + " ko");
+	
+	if(tailleFichierEnKiloBytes == tailleFichierCompresseEnKiloBytes) {
+	    return 0;
+	}
 
 	return  tailleFichierEnKiloBytes / tailleFichierCompresseEnKiloBytes;
     }

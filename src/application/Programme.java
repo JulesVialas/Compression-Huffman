@@ -19,7 +19,7 @@ public class Programme {
 	String arbreHuffman = "";
 	String nomFichier = "coucou";
 	System.out.println("Lecture du fichier " + nomFichier + "txt ...");
-	
+
 	try {
 	    lecture = GestionFichierTexte.lireFichier(nomFichier + ".txt");
 	} catch (IOException e) {
@@ -32,13 +32,14 @@ public class Programme {
 	for (Object[] element : occurrences) {
 	    char caractere = (char) element[0];
 	    if (caractere == '\n') {
-	        caractere = '↲';
+		caractere = '↲';
 	    }
 	    if (caractere == ' ') {
-	        caractere = '␣';
+		caractere = '␣';
 	    }
 
-	    System.out.println(caractere + " : " + element[1] +" : "+(double) (int) element[1] / occurrences.length + " % ");
+	    System.out.println(
+		    caractere + " : " + element[1] + " : " + (double) (int) element[1] / occurrences.length + " % ");
 	}
 
 	System.out.println("Construction de l'arbre huffman ...");
@@ -52,7 +53,7 @@ public class Programme {
 	    e.printStackTrace();
 	}
 	System.out.println(arbreHuffman);
-	
+
 	Object[][] arbreRestaure = null;
 	System.out.println("Résultat de la restauration de l'arbre huffman : ");
 	try {
@@ -66,16 +67,17 @@ public class Programme {
 	}
 
 	System.out.println("Resultat de la compression de " + nomFichier + ".txt");
-        long startTime = System.currentTimeMillis();
-        String lectureCompresse = Compression.compresserTexte(lecture, arbreRestaure);
+	long startTime = System.currentTimeMillis();
+	String lectureCompresse = Compression.compresserTexte(lecture, arbreRestaure);
 	try {
 	    GestionFichierBinaire.ecriture(lectureCompresse, nomFichier + ".bin");
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-        long compressionTime = System.currentTimeMillis() - startTime;
+	long compressionTime = System.currentTimeMillis() - startTime;
 	System.out.println(lectureCompresse + "");
-	System.out.println("Taux de compression " + TailleFichiers.tauxCompression(nomFichier + ".txt",nomFichier + ".bin"));
+	System.out.println(
+		"Taux de compression " + TailleFichiers.tauxCompression(nomFichier + ".txt", nomFichier + ".bin"));
 	System.out.println("Durée de la compression : " + compressionTime + " ms");
 
 	System.out.println("Resultat de la decompression de coucou.bin : ");
@@ -84,7 +86,8 @@ public class Programme {
 	GestionFichierTexte.ecrireFichier(texteDecompresse, nomFichier + "Decompresse.txt");
 	long decompressionTime = System.currentTimeMillis() - startTime;
 	System.out.println(texteDecompresse);
-	System.out.println("Taux de decompression " + TailleFichiers.tauxCompression(nomFichier + ".txt",nomFichier + "Decompresse.txt"));
+	System.out.println("Taux de decompression "
+		+ TailleFichiers.tauxCompression(nomFichier + ".txt", nomFichier + "Decompresse.txt"));
 	System.out.println("Durée de la decompression : " + decompressionTime + " ms");
 	System.out.println("Ecriture de " + nomFichier + ".txt");
     }

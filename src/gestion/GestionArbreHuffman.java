@@ -28,12 +28,12 @@ public class GestionArbreHuffman {
 	if (noeud.getGauche() == null && noeud.getDroite() == null) {
 	    if (noeud.getCaractere() == '\n') {
 		contenuFichier.write(
-			"codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence() + " ; symbole = ↲\n");
+			"codeHuffman = " + codeHuffman + " ; encode = " + Integer.toBinaryString('\n') + " ; symbole = ↲\n");
 	    } else if (noeud.getCaractere() == ' ') {
 		contenuFichier.write(
-			"codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence() + " ; symbole = ␣\n");
+			"codeHuffman = " + codeHuffman + " ; encode = " + Integer.toBinaryString(' ') + " ; symbole = ␣\n");
 	    } else {
-		contenuFichier.write("codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence()
+		contenuFichier.write("codeHuffman = " + codeHuffman + " ; encode = " + Integer.toBinaryString(noeud.getCaractere())
 			+ " ; symbole = " + noeud.getCaractere() + "\n");
 	    }
 	}

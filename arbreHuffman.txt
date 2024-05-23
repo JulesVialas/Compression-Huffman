@@ -1,0 +1,3 @@
+codeHuffman = 00 ; encode = 1101111 ; symbole = o
+codeHuffman = 01 ; encode = 1110101 ; symbole = u
+codeHuffman = 1 ; encode = 1100011 ; symbole = c

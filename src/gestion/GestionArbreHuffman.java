@@ -1,4 +1,4 @@
-package gestionFichier;
+package gestion;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,50 +13,49 @@ import huffman.Noeud;
 public class GestionArbreHuffman {
 
     public static void sauvegardeArbreHuffman(Noeud racine, String nomFichier) {
-	try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomFichier))) {
-	    parcourirArbre(racine, writer, "");
+	try (BufferedWriter contenuFichier = new BufferedWriter(new FileWriter(nomFichier))) {
+	    parcourirArbreHuffman(racine, contenuFichier, "");
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
     }
 
-    private static void parcourirArbre(Noeud noeud, BufferedWriter writer, String codeHuffman) throws IOException {
+    private static void parcourirArbreHuffman(Noeud noeud, BufferedWriter contenuFichier, String codeHuffman) throws IOException {
 	if (noeud == null) {
 	    return;
 	}
 	if (noeud.getGauche() == null && noeud.getDroite() == null) {
 	    if (noeud.getCaractere() == '\n') {
-		writer.write(
+		contenuFichier.write(
 			"codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence() + " ; symbole = ↲\n");
 	    } else if (noeud.getCaractere() == ' ') {
-		writer.write(
+		contenuFichier.write(
 			"codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence() + " ; symbole = ␣\n");
 	    } else {
-		writer.write("codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence() + " ; symbole = "
+		contenuFichier.write("codeHuffman = " + codeHuffman + " ; frequence = " + noeud.getFrequence() + " ; symbole = "
 			+ noeud.getCaractere() + "\n");
 	    }
 	}
-	parcourirArbre(noeud.getGauche(), writer, codeHuffman + "0");
-	parcourirArbre(noeud.getDroite(), writer, codeHuffman + "1");
+	parcourirArbreHuffman(noeud.getGauche(), contenuFichier, codeHuffman + "0");
+	parcourirArbreHuffman(noeud.getDroite(), contenuFichier, codeHuffman + "1");
 
     }
 
     public static Object[][] restaurerArbreHuffman(String nomFichier) throws IOException {
 	List<Object[]> dictionnaire = new ArrayList<>();
 
-	try (BufferedReader reader = new BufferedReader(new FileReader(nomFichier))) {
+	try (BufferedReader lecteur = new BufferedReader(new FileReader(nomFichier))) {
 	    String ligne;
-	    while ((ligne = reader.readLine()) != null) {
+	    while ((ligne = lecteur.readLine()) != null) {
 
 		String[] parties = ligne.split(";");
 
-		String[] codePart = parties[0].split("=");
-		String[] encodePart = parties[1].split("=");
-		String[] symbolePart = parties[2].split("=");
+		String[] partieCodeHuffman = parties[0].split("=");
+		String[] partieCaractere = parties[2].split("=");
 
-		String codeHuffman = codePart[1].trim();
-		String symboleStr = symbolePart[1].trim();
-		char symbole = decodeSymbole(symboleStr);
+		String codeHuffman = partieCodeHuffman[1].trim();
+		String caractere = partieCaractere[1].trim();
+		char symbole = decoderSymbole(caractere);
 
 		dictionnaire.add(new Object[] { symbole, codeHuffman });
 	    }
@@ -65,14 +64,14 @@ public class GestionArbreHuffman {
 	return dictionnaire.toArray(new Object[0][0]);
     }
 
-    private static char decodeSymbole(String symboleStr) {
-	switch (symboleStr) {
+    private static char decoderSymbole(String caractere) {
+	switch (caractere) {
 	case "↲":
 	    return '\n';
 	case "␣":
 	    return ' ';
 	default:
-	    return symboleStr.length() == 1 ? symboleStr.charAt(0) : '\0';
+	    return caractere.length() == 1 ? caractere.charAt(0) : '\0';
 	}
     }
 }

@@ -12,15 +12,15 @@ public class Noeud {
     }
 
     public char getCaractere() {
-	return caractere;
+	return this.caractere;
     }
 
     public int getFrequence() {
-	return frequence;
+	return this.frequence;
     }
 
     public Noeud getGauche() {
-	return gauche;
+	return this.gauche;
     }
 
     public void setGauche(Noeud gauche) {
@@ -28,7 +28,7 @@ public class Noeud {
     }
 
     public Noeud getDroite() {
-	return droite;
+	return this.droite;
     }
 
     public void setDroite(Noeud droite) {

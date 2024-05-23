@@ -1,4 +1,4 @@
-package gestionFichier;
+package gestion;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,31 +10,31 @@ public class GestionFichierTexte {
 
     public static String lireFichier(String cheminFichier) throws IOException {
 	StringBuilder contenuBuilder = new StringBuilder();
-	try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
+	try (BufferedReader lecteur = new BufferedReader(new FileReader(cheminFichier))) {
 	    String ligne;
-	    boolean isFirstLine = true;
-	    while ((ligne = reader.readLine()) != null) {
-		if (!isFirstLine) {
+	    boolean premiereLigne = true;
+	    while ((ligne = lecteur.readLine()) != null) {
+		if (!premiereLigne) {
 		    contenuBuilder.append('\n');
 		}
 		contenuBuilder.append(ligne);
-		isFirstLine = false;
+		premiereLigne = false;
 	    }
 	}
 	return contenuBuilder.toString();
     }
 
     public static void ecrireFichier(String contenu, String nomDeFichier) {
-	BufferedWriter writer = null;
+	BufferedWriter contenuFichier = null;
 	try {
-	    writer = new BufferedWriter(new FileWriter(nomDeFichier));
-	    writer.write(contenu);
+	    contenuFichier = new BufferedWriter(new FileWriter(nomDeFichier));
+	    contenuFichier.write(contenu);
 	} catch (IOException e) {
 	    e.printStackTrace();
 	} finally {
 	    try {
-		if (writer != null) {
-		    writer.close();
+		if (contenuFichier != null) {
+		    contenuFichier.close();
 		}
 	    } catch (IOException e) {
 		e.printStackTrace();

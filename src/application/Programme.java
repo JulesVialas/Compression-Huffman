@@ -2,9 +2,9 @@ package application;
 
 import java.io.IOException;
 
-import gestionFichier.GestionArbreHuffman;
-import gestionFichier.GestionFichierBinaire;
-import gestionFichier.GestionFichierTexte;
+import gestion.GestionArbreHuffman;
+import gestion.GestionFichierBinaire;
+import gestion.GestionFichierTexte;
 import huffman.ArbreHuffman;
 import huffman.Compression;
 import huffman.CompterOccurrences;

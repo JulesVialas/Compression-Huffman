@@ -1,4 +1,4 @@
-package gestionFichier;
+package gestion;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -42,18 +42,18 @@ public class GestionFichierBinaire {
 	int length = stringBinaire.length();
 	int byteLength = (length + 7) / 8;
 	byte[] bytes = new byte[byteLength];
-	for (int i = 0; i < byteLength; i++) {
+	for (int rang = 0; rang < byteLength; rang++) {
 	    int byteValue = 0;
-	    int start = i * 8;
+	    int start = rang * 8;
 	    int end = Math.min(start + 8, length);
-	    for (int j = start; j < end; j++) {
+	    for (int secondRang = start; secondRang < end; secondRang++) {
 		byteValue <<= 1;
-		if (stringBinaire.charAt(j) == '1') {
+		if (stringBinaire.charAt(secondRang) == '1') {
 		    byteValue |= 1;
 		}
 	    }
 	    byteValue <<= (8 - (end - start));
-	    bytes[i] = (byte) byteValue;
+	    bytes[rang] = (byte) byteValue;
 	}
 	return bytes;
     }

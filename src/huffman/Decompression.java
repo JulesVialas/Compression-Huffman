@@ -2,7 +2,7 @@ package huffman;
 
 import java.io.IOException;
 
-import gestionFichier.GestionFichierBinaire;
+import gestion.GestionFichierBinaire;
 
 public class Decompression {
 

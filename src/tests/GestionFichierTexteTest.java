@@ -12,7 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import gestionFichier.GestionFichierTexte;
+import gestion.GestionFichierTexte;
 
 public class GestionFichierTexteTest {
 

@@ -88,7 +88,7 @@ public class Main extends Application {
 		    return;
 		}
 		Object[][] resultat = CompterOccurrences.compter(contenuFichier);
-		afficheroccurrencesDansTableau(resultat);
+		afficheroccurrencesDansTableau(resultat, contenuFichier.length());
 	    } catch (IOException e) {
 		e.printStackTrace();
 	    }
@@ -103,43 +103,42 @@ public class Main extends Application {
 	alert.showAndWait();
     }
 
-    private void afficheroccurrencesDansTableau(Object[][] occurrences) {
+    private void afficheroccurrencesDansTableau(Object[][] occurrences, int totalCaracteres) {
 	Stage stage = new Stage();
-	stage.setTitle("occurrences");
+	stage.setTitle("Occurrences des caractères");
 
 	TableView<Occurrence> tableView = new TableView<>();
-	TableColumn<Occurrence, String> colonneCaractere = new TableColumn<>("Caractère");
-	colonneCaractere.setCellValueFactory(new PropertyValueFactory<>("caractere"));
-
-	TableColumn<Occurrence, Integer> colonneOccurrences = new TableColumn<>("occurrences");
-	colonneOccurrences.setCellValueFactory(new PropertyValueFactory<>("occurrences"));
-
-	TableColumn<Occurrence, Double> colonneFrequence = new TableColumn<>("frequence");
-	colonneFrequence.setCellValueFactory(new PropertyValueFactory<>("frequence"));
-
-	colonneCaractere.prefWidthProperty().bind(tableView.widthProperty().multiply(0.3));
-	colonneOccurrences.prefWidthProperty().bind(tableView.widthProperty().multiply(0.35));
-	colonneFrequence.prefWidthProperty().bind(tableView.widthProperty().multiply(0.35));
-
-	tableView.getColumns().addAll(colonneCaractere, colonneOccurrences, colonneFrequence);
-
 	ObservableList<Occurrence> data = FXCollections.observableArrayList();
-	int totaloccurrences = 0;
-	for (Object[] element : occurrences) {
-	    totaloccurrences += (int) element[1];
+
+	for (Object[] occurrence : occurrences) {
+	    String caractere = occurrence[0].toString();
+	    int count = (int) occurrence[1];
+	    double frequence = (double) count / totalCaracteres;
+	    data.add(new Occurrence(caractere, count, frequence));
 	}
 
-	for (Object[] element : occurrences) {
-	    char caractere = (char) element[0];
-	    int occurrences1 = (int) element[1];
-	    double frequence = (double) occurrences1 / totaloccurrences * 100;
-	    data.add(new Occurrence(caractere, occurrences1, frequence));
-	}
+	TableColumn<Occurrence, String> caractereCol = new TableColumn<>("Caractère");
+	TableColumn<Occurrence, Integer> occurrencesCol = new TableColumn<>("Occurrences");
+	TableColumn<Occurrence, Double> frequenceCol = new TableColumn<>("Fréquence");
+
+	caractereCol.setCellValueFactory(new PropertyValueFactory<>("caractere"));
+	occurrencesCol.setCellValueFactory(new PropertyValueFactory<>("occurrences"));
+	frequenceCol.setCellValueFactory(new PropertyValueFactory<>("frequence"));
 
 	tableView.setItems(data);
+	tableView.getColumns().addAll(caractereCol, occurrencesCol, frequenceCol);
+
+	// Bind the column widths to the table width divided by the number of columns
+	tableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+	    double tableWidth = newWidth.doubleValue();
+	    caractereCol.setPrefWidth(tableWidth / 3);
+	    occurrencesCol.setPrefWidth(tableWidth / 3);
+	    frequenceCol.setPrefWidth(tableWidth / 3);
+	});
 
 	VBox vbox = new VBox(tableView);
 	Scene scene = new Scene(vbox);
+
 	stage.setScene(scene);
 	stage.show();
     }
@@ -159,7 +158,7 @@ public class Main extends Application {
 		}
 		FileChooser saveFileChooser = new FileChooser();
 		saveFileChooser.setTitle("Enregistrer l'arbre Huffman");
-		saveFileChooser.setInitialFileName("arbre_huffman.txt");
+		saveFileChooser.setInitialFileName("dictionnaire_huffman.txt");
 		File fichierEnregistrement = saveFileChooser.showSaveDialog(new Stage());
 		if (fichierEnregistrement != null) {
 		    Object[][] occurrences = CompterOccurrences.compter(contenuFichier);
@@ -175,8 +174,7 @@ public class Main extends Application {
     private void gérerCompresserFichier() {
 	FileChooser fileChooser = new FileChooser();
 	fileChooser.setTitle("Sélectionner un fichier texte (.txt)");
-	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt");
-	fileChooser.getExtensionFilters().add(extFilter);
+	fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt"));
 	File fichier = fileChooser.showOpenDialog(new Stage());
 	if (fichier != null) {
 	    try {
@@ -193,13 +191,14 @@ public class Main extends Application {
 		    FileChooser saveFileChooser = new FileChooser();
 		    saveFileChooser.setTitle("Enregistrer le fichier compressé (.bin)");
 		    saveFileChooser.setInitialFileName("fichier_compressé.bin");
+		    saveFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers binaires (*.bin)", "*.bin"));
 		    File fichierEnregistrement = saveFileChooser.showSaveDialog(new Stage());
 		    if (fichierEnregistrement != null) {
 			long startTime = System.currentTimeMillis();
 			String lectureCompresse = Compression.compresserTexte(contenuFichier, GestionArbreHuffman.restaurerArbreHuffman(fichierDictionnaire.getAbsolutePath()));
 			GestionFichierBinaire.ecriture(lectureCompresse, fichierEnregistrement.getAbsolutePath());
 			long compressionTime = System.currentTimeMillis() - startTime;
-			double tauxCompression = TailleFichiers.tauxCompression(fichier.getName(), fichierEnregistrement.getName());
+			double tauxCompression = TailleFichiers.tauxCompression(fichier.getAbsolutePath(), fichierEnregistrement.getAbsolutePath());
 			afficherPopUpInformations("Taux de compression : " + tauxCompression + "\nDurée de la compression : " + compressionTime + " ms");
 		    }
 		}
@@ -212,8 +211,7 @@ public class Main extends Application {
     private void gérerDecompresserFichier() {
 	FileChooser fileChooser = new FileChooser();
 	fileChooser.setTitle("Sélectionner un fichier binaire (.bin)");
-	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichiers binaires (*.bin)", "*.bin");
-	fileChooser.getExtensionFilters().add(extFilter);
+	fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers binaires (*.bin)", "*.bin"));
 	File fichier = fileChooser.showOpenDialog(new Stage());
 	if (fichier != null) {
 	    FileChooser dictionaryChooser = new FileChooser();
@@ -221,20 +219,27 @@ public class Main extends Application {
 	    dictionaryChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt"));
 	    File fichierDictionnaire = dictionaryChooser.showOpenDialog(new Stage());
 	    if (fichierDictionnaire != null) {
-		String texteDecompresse = null;
-		try {
-		    long startTime = System.currentTimeMillis();
-		    texteDecompresse = Decompression.decompresser(fichier.getAbsolutePath(), GestionArbreHuffman.restaurerArbreHuffman(fichierDictionnaire.getAbsolutePath()));
-		    long decompressionTime = System.currentTimeMillis() - startTime;
-		    double tauxDecompression = TailleFichiers.tauxCompression(fichier.getName(), fichier.getName() + "Decompresse.txt");
-		    afficherPopUpInformations("Taux de décompression : " + tauxDecompression + "\nDurée de la décompression : " + decompressionTime + " ms");
-		    GestionFichierTexte.ecrireFichier(texteDecompresse, fichier.getName() + "Decompresse.txt");
-		} catch (IOException e) {
-		    e.printStackTrace();
+		FileChooser saveFileChooser = new FileChooser();
+		saveFileChooser.setTitle("Enregistrer le fichier décompressé");
+		saveFileChooser.setInitialFileName("fichier_decompressé.txt");
+		saveFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt"));
+		File fichierEnregistrement = saveFileChooser.showSaveDialog(new Stage());
+		if (fichierEnregistrement != null) {
+		    try {
+			long startTime = System.currentTimeMillis();
+			String texteDecompresse = Decompression.decompresser(fichier.getAbsolutePath(), GestionArbreHuffman.restaurerArbreHuffman(fichierDictionnaire.getAbsolutePath()));
+			long decompressionTime = System.currentTimeMillis() - startTime;
+			GestionFichierTexte.ecrireFichier(texteDecompresse, fichierEnregistrement.getAbsolutePath());
+			double tauxDecompression = TailleFichiers.tauxCompression(fichier.getAbsolutePath(), fichierEnregistrement.getAbsolutePath());
+			afficherPopUpInformations("Taux de décompression : " + tauxDecompression + "\nDurée de la décompression : " + decompressionTime + " ms");
+		    } catch (IOException e) {
+			e.printStackTrace();
+		    }
 		}
 	    }
 	}
     }
+
     private void afficherPopUpInformations(String message) {
 	Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	alert.setTitle("Résultat de la compression");

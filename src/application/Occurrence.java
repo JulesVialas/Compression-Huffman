@@ -2,24 +2,24 @@ package application;
 
 public class Occurrence {
     private final String caractere;
-    private final int frequence;
-    private final double pourcentage;
+    private final int occurrences;
+    private final double frequence;
 
-    public Occurrence(char caractere, int frequence, double pourcentage) {
-        this.caractere = caractere == '\n' ? "↲" : (caractere == ' ' ? "␣" : Character.toString(caractere));
-        this.frequence = frequence;
-        this.pourcentage = pourcentage;
+    public Occurrence(String caractere, int occurrences, double frequence) {
+	this.caractere = caractere;
+	this.occurrences = occurrences;
+	this.frequence = frequence;
     }
 
     public String getCaractere() {
-        return caractere;
+	return caractere;
     }
 
-    public int getFrequence() {
-        return frequence;
+    public int getOccurrences() {
+	return occurrences;
     }
 
-    public double getPourcentage() {
-        return pourcentage;
+    public double getFrequence() {
+	return frequence;
     }
 }

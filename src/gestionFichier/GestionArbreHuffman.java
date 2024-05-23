@@ -41,29 +41,18 @@ public class GestionArbreHuffman {
 
     }
 
-    public static Object[][] restaurerArborescenceHuffman(String nomFichier) throws IOException {
+    public static Object[][] restaurerArbreHuffman(String nomFichier) throws IOException {
 	List<Object[]> dictionnaire = new ArrayList<>();
 
 	try (BufferedReader reader = new BufferedReader(new FileReader(nomFichier))) {
 	    String ligne;
 	    while ((ligne = reader.readLine()) != null) {
-		if (ligne.trim().isEmpty()) {
-		    continue; // Ignorer les lignes vides
-		}
 
 		String[] parties = ligne.split(";");
-
-		if (parties.length != 3) {
-		    continue; // Ignorer les lignes mal formatées
-		}
 
 		String[] codePart = parties[0].split("=");
 		String[] encodePart = parties[1].split("=");
 		String[] symbolePart = parties[2].split("=");
-
-		if (codePart.length != 2 || encodePart.length != 2 || symbolePart.length != 2) {
-		    continue; // Ignorer les lignes mal formatées
-		}
 
 		String codeHuffman = codePart[1].trim();
 		String symboleStr = symbolePart[1].trim();

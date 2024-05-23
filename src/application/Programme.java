@@ -49,12 +49,12 @@ public class Programme {
 	    e.printStackTrace();
 	}
 
-	System.out.print(arbreHuffman);
+	System.out.println(arbreHuffman);
 	Object[][] arbreRestaure = null;
 
 	System.out.println("\nRésultat de la restauration de l'arbre huffman : \n");
 	try {
-	    arbreRestaure = GestionArbreHuffman.restaurerArborescenceHuffman("arbreHuffman.txt");
+	    arbreRestaure = GestionArbreHuffman.restaurerArbreHuffman("arbreHuffman.txt");
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}

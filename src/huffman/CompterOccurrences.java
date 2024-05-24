@@ -6,7 +6,7 @@
 package huffman;
 
 /**
- * La classe CompterOccurrences contient des méthodes pour compter
+ * CompterOccurrences contient des méthodes pour compter
  * les occurrences des caractères dans un texte et retourner un
  * tableau d'objets trié par fréquence d'occurrences.
  */	
@@ -15,13 +15,11 @@ public class CompterOccurrences {
     /**
      * Compte les occurrences de chaque caractère dans un texte 
      * donné.
-     * Retourne un tableau d'objets trié dans l'ordre croissant des
-     * fréquences des caractères.
      *
      * @param texte	le texte dont on veut compter les occurrences
      * 			des caractères
      * @return un tableau d'objets contenant les caractères et leurs 
-     * 	       occurrences triées par fréquence
+     * 	       occurrences triées par ordre croissant des fréquences
      */
     public static Object[][] compter(String texte) {
 	testValide(texte);

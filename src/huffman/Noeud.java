@@ -5,7 +5,7 @@
 package huffman;
 
 /**
- * La classe Noeud représente un noeud dans un arbre de Huffman.
+ * Noeud représente un noeud dans un arbre de Huffman.
  * Chaque noeud contient un caractère, une fréquence, ainsi que des 
  * références vers les noeuds enfants gauche et droit.
  */

@@ -1,11 +1,24 @@
+/*
+ * DecompressionRapide.java                                            02 mai 2024
+ * IUT de Rodez, pas de copyright.
+ */
 package huffman;
 
 import java.io.IOException;
 
 import gestion.GestionFichierBinaire;
-
+/**
+ * DecompressionRapide propose plusieurs maniere de faire la décompression
+ */
 public class DecompressionRapide {
-
+    /**
+     * Décompresse des fichier à partir de la racine
+     *
+     * @param FichierCompresse fichier à décompresser
+     * @param la racine donnée par l'arbre Huffman
+     * 
+     * @return le texte décompressé
+     */
     public static String decompresser(String nomFichierCompresse, Noeud racine) {
         String texteDecompresse = "";
         String texteBinaire = null;
@@ -18,7 +31,15 @@ public class DecompressionRapide {
         texteDecompresse = decompresserAvecArbre(texteBinaire, racine);
         return texteDecompresse;
     }
-
+    
+    /**
+     * Décompresse des fichier binaire à partir de la racine
+     *
+     * @param TexteBinaire texte Binaire à décompresser
+     * @param la racine donnée par l'arbre Huffman
+     * 
+     * @return le texte décompressé
+     */
     private static String decompresserAvecArbre(String texteBinaire, Noeud racine) {
         StringBuilder texteDecompresse = new StringBuilder();
         Noeud noeudCourant = racine;

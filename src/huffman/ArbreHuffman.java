@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * La classe ArbreHuffman contient des méthodes pour construire un 
+ * ArbreHuffman contient des méthodes pour construire un 
  * arbre de Huffman à partir des occurrences des caractères d'un 
  * fichier.
  */

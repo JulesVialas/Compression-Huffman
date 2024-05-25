@@ -22,7 +22,7 @@ public class GestionFichierTexte {
      * Lit le contenu d'un fichier texte et retourne ce contenu sous 
      * forme de chaîne de caractères.
      *
-     * @param cheminFichier	 le chemin du fichier à lire
+     * @param cheminFichier	 Le chemin du fichier à lire
      * @return le contenu du fichier sous forme de chaîne de caractères
      * @throws IOException si une erreur d'entrée/sortie se produit
      */

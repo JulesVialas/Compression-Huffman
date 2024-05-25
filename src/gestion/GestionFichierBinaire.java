@@ -1,3 +1,7 @@
+/*
+ * GestonFichierBinaire.java                                            [METTRE DATE COHERENTE]
+ * IUT de Rodez, pas de copyright.
+ */
 package gestion;
 
 import java.io.DataInputStream;
@@ -6,8 +10,19 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * GestionFichierBinaire contient des méthodes pour lire et écrire des fichiers binaires
+ * contenant des chaînes de bits. 
+ */
 public class GestionFichierBinaire {
 
+    /**
+     * Lit le contenue d'un fichier et le retourne sous chaîne de bits.
+     * 
+     * @param nomFichier Le nom du fichier à lire.
+     * @return La chaîne de bits lue depuis le fichier.
+     * @throws IOException Si une erreur d'entrée ou de sortie survient.
+     */
     public static String lecture(String nomFichier) throws IOException {
 	try (DataInputStream input = new DataInputStream(new FileInputStream(nomFichier))) {
 	    int longueurBinaire = input.readInt();
@@ -25,7 +40,12 @@ public class GestionFichierBinaire {
 	    return stringBinaire.toString();
 	}
     }
-
+    /**
+     * Convertit un octet en sa représentation binaire sous forme de chaîne.
+     *
+     * @param octet L'octet à convertir.
+     * @return La représentation binaire de l'octet sous forme de chaîne.
+     */
     private static String byteVersStringBinaire(int octet) {
 	return String.format("%8s", Integer.toBinaryString(octet & 0xFF)).replace(' ', '0');
     }
@@ -38,6 +58,14 @@ public class GestionFichierBinaire {
 	}
     }
 
+    /**
+     * Écrit une chaîne de bits dans un fichier binaire.
+     *
+     * @param stringBinaire La chaîne de bits à écrire.
+     * @param nomFichier    Le nom du fichier où écrire.
+     * @throws IOException  Si une erreur d'entrée ou 
+     * 			    de sortie survient.
+     */
     private static byte[] stringBinaireVersBytes(String stringBinaire) {
 	int length = stringBinaire.length();
 	int byteLength = (length + 7) / 8;

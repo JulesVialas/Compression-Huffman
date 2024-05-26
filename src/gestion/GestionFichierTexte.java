@@ -1,5 +1,5 @@
 /*
- * GestionFichierTexte.java                                            22 avril 2024
+ * GestionFichierTexte.java                                        22 avril 2024
  * IUT de Rodez, pas de copyright.
  */
 
@@ -23,7 +23,8 @@ public class GestionFichierTexte {
      * forme de chaîne de caractères.
      *
      * @param cheminFichier	 Le chemin du fichier à lire
-     * @return le contenu du fichier sous forme de chaîne de caractères
+     * @return le contenu du fichier sous forme de chaîne de 
+     * 		caractères
      * @throws IOException si une erreur d'entrée/sortie se produit
      */
     public static String lireFichier(String cheminFichier) throws IOException {

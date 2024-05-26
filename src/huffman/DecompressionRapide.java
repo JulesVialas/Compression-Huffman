@@ -14,8 +14,8 @@ public class DecompressionRapide {
     /**
      * Décompresse des fichier à partir de la racine
      *
-     * @param FichierCompresse fichier à décompresser
-     * @param la racine donnée par l'arbre Huffman
+     * @param nomFichierCompresse fichier à décompresser
+     * @param racine la racine donnée par l'arbre Huffman
      * 
      * @return le texte décompressé
      */

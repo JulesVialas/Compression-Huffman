@@ -13,18 +13,21 @@ import huffman.Compression;
 
 class CompressionTest {
 
-    private static final Object[][] DICTIONNAIRE = { { 'c', "00" }, { 'o', "01" }, { 'u', "10" } };
+    private static final Object[][] DICTIONNAIRE = { { 'c', "00" }, 
+	    { 'o', "01" }, { 'u', "10" } };
 
     private static final Object[][] DICTIONNAIRE_VIDE = {};
 
-    private static final Object[][] DICTIONNAIRE_AVEC_NULL = { { 'a', "100" }, { null, null }, { 'c', "110" } };
+    private static final Object[][] DICTIONNAIRE_AVEC_NULL = { { 'a', "100" },
+	    { null, null }, { 'c', "110" } };
 
     @Test
     void testCompressionTexteIdentique() {
 	String texteACompresser = "coucou";
 	String texteComprimeAttendu = "000110000110";
 
-	String texteComprime = Compression.compresserTexte(texteACompresser, DICTIONNAIRE);
+	String texteComprime = Compression.compresserTexte(texteACompresser, 
+		DICTIONNAIRE);
 
 	assertEquals(texteComprimeAttendu, texteComprime);
     }
@@ -65,9 +68,13 @@ class CompressionTest {
 
     @Test
     void testTrouverCodeHuffmanDictionnaireAvecNull() {
-	assertEquals("100", Compression.trouverCodeHuffman('a', DICTIONNAIRE_AVEC_NULL));
-	assertEquals("110", Compression.trouverCodeHuffman('c', DICTIONNAIRE_AVEC_NULL));
-	assertEquals("", Compression.trouverCodeHuffman('b', DICTIONNAIRE_AVEC_NULL));
-	assertEquals("", Compression.trouverCodeHuffman('h', DICTIONNAIRE_AVEC_NULL));
+	assertEquals("100", Compression.trouverCodeHuffman('a', 
+		DICTIONNAIRE_AVEC_NULL));
+	assertEquals("110", Compression.trouverCodeHuffman('c', 
+		DICTIONNAIRE_AVEC_NULL));
+	assertEquals("", Compression.trouverCodeHuffman('b', 
+		DICTIONNAIRE_AVEC_NULL));
+	assertEquals("", Compression.trouverCodeHuffman('h', 
+		DICTIONNAIRE_AVEC_NULL));
     }
 }

@@ -21,7 +21,8 @@ import gestion.GestionFichierBinaire;
 class GestionFichierBinaireTest {
 
     private static final String TEMP_FILE_PATH = "testFichierBinaire.bin";
-    private static final String STRING_BINAIRE = "10101010110011001100110010101010";
+    private static final String STRING_BINAIRE = "1010101011001100"
+    	+ "1100110010101010";
 
     @BeforeEach
     void setUp() throws IOException {
@@ -36,15 +37,18 @@ class GestionFichierBinaireTest {
     @Test
     void testLecture() throws IOException {
 	String contenuLu = GestionFichierBinaire.lecture(TEMP_FILE_PATH);
-	assertEquals(STRING_BINAIRE, contenuLu, "Le contenu lu doit correspondre au contenu écrit.");
+	assertEquals(STRING_BINAIRE, contenuLu, "Le contenu lu doit "
+		+ "correspondre au contenu écrit.");
     }
 
     @Test
     void testEcriture() throws IOException {
 	File fichierBinaire = new File(TEMP_FILE_PATH);
-	assertTrue(fichierBinaire.exists(), "Le fichier binaire doit exister après l'écriture.");
+	assertTrue(fichierBinaire.exists(), "Le fichier binaire doit exister "
+		+ "après l'écriture.");
 
 	String contenuLu = GestionFichierBinaire.lecture(TEMP_FILE_PATH);
-	assertEquals(STRING_BINAIRE, contenuLu, "Le contenu lu doit correspondre au contenu écrit.");
+	assertEquals(STRING_BINAIRE, contenuLu, "Le contenu lu doit correspondre"
+		+ " au contenu écrit.");
     }
 }

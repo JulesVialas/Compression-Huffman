@@ -36,7 +36,8 @@ class GestionFichierTexteTest {
     @Test
     void testLireFichier() throws IOException {
 	String contenu = GestionFichierTexte.lireFichier(TEMP_FILE_PATH);
-	assertEquals(FILE_CONTENT, contenu, "Le contenu lu ne correspond pas au contenu attendu.");
+	assertEquals(FILE_CONTENT, contenu, "Le contenu lu ne correspond pas "
+		+ "au contenu attendu.");
     }
 
     @Test
@@ -50,7 +51,8 @@ class GestionFichierTexteTest {
 	assertTrue(nouveauFichier.exists(), "Le fichier devrait exister.");
 
 	String contenuLu = GestionFichierTexte.lireFichier(nouveauFichierPath);
-	assertEquals(nouveauContenu, contenuLu, "Le contenu du fichier ne correspond pas au contenu écrit.");
+	assertEquals(nouveauContenu, contenuLu, "Le contenu du fichier ne "
+		+ "correspond pas au contenu écrit.");
 
 	Files.deleteIfExists(Paths.get(nouveauFichierPath));
     }

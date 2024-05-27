@@ -329,6 +329,10 @@ public class Main extends Application {
 	alert.showAndWait();
     }
 
+    /**
+     * TODO commenter le rôle de cette méthode
+     * @param args
+     */
     public static void main(String[] args) {
 	launch(args);
     }

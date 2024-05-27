@@ -1,3 +1,7 @@
+/*
+ * Programme.java                                        20 mai 2024
+ * IUT de Rodez, pas de copyright.
+ */
 package application;
 
 import java.io.IOException;
@@ -47,8 +51,8 @@ public class Programme {
 	    }
 
 	    System.out.println(
-		    caractere + " : " + element[1] + " : " + (double) (int) 
-		    element[1] / occurrences.length + " % ");
+		    caractere + " : " + element[1] + " : " + (double) (int)
+		    element[1] / lecture.length()); 
 	}
 
 	System.out.println("Construction de l'arbre huffman ...");

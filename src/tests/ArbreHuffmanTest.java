@@ -48,7 +48,8 @@ class ArbreHuffmanTest {
 
     @Test
     void testConstructionArbreHuffmanAvecOccurrencesNonRepetees() {
-	Noeud root4 = ArbreHuffman.constructionArbreHuffman(OCCURRENCES_NON_REPETEES);
+	Noeud root4 = ArbreHuffman.constructionArbreHuffman(
+		OCCURRENCES_NON_REPETEES);
 	assertNotNull(root4);
 	assertTrue(estArbreHuffmanValide(root4));
     }
@@ -61,12 +62,15 @@ class ArbreHuffmanTest {
     }
 
     private boolean estArbreHuffmanValide(Noeud noeud) {
-	if ((noeud == null) || (noeud.getGauche() == null && noeud.getDroite() == null)) {
+	if ((noeud == null) || (noeud.getGauche() == null && noeud.getDroite()
+		== null)) {
 	    return true;
 	}
 	if (noeud.getGauche() != null && noeud.getDroite() != null) {
-	    return noeud.getFrequence() == (noeud.getGauche().getFrequence() + noeud.getDroite().getFrequence())
-		    && estArbreHuffmanValide(noeud.getGauche()) && estArbreHuffmanValide(noeud.getDroite());
+	    return noeud.getFrequence() == (noeud.getGauche().getFrequence() 
+		    + noeud.getDroite().getFrequence())
+		    && estArbreHuffmanValide(noeud.getGauche()) && 
+		    estArbreHuffmanValide(noeud.getDroite());
 	}
 	return false;
     }

@@ -27,10 +27,6 @@ public class TailleFichiers {
 	double tailleFichierCompresseEnKiloBytes 
 				= tailleFichierCompresse.length() / 1024.0;
 
-	if(tailleFichierEnKiloBytes == tailleFichierCompresseEnKiloBytes) {
-	    return 0;
-	}
-
 	return  tailleFichierEnKiloBytes / tailleFichierCompresseEnKiloBytes;
     }
 }

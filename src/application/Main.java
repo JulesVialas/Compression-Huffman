@@ -1,3 +1,7 @@
+/*
+ * Main.java                                        20 mai 2024
+ * IUT de Rodez, pas de copyright.
+ */
 package application;
 
 import javafx.application.Application;
@@ -34,10 +38,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 	primaryStage.setTitle("Application Huffman");
 
-	Button compteroccurrencesBouton = new Button("Compter les occurrences d'un fichier texte");
-	Button creerArbreHuffmanBouton = new Button("Créer un arbre Huffman à partir d'un fichier texte");
-	Button compresserFichierBouton = new Button("Compresser un fichier texte");
-	Button decompresserFichierBouton = new Button("Décompresser un fichier binaire");
+	Button compteroccurrencesBouton 
+	= new Button("Compter les occurrences d'un fichier texte");
+	Button creerArbreHuffmanBouton 
+	= new Button("Créer un arbre Huffman à partir d'un fichier texte");
+	Button compresserFichierBouton 
+	= new Button("Compresser un fichier texte");
+	Button decompresserFichierBouton 
+	= new Button("Décompresser un fichier binaire");
 
 	compteroccurrencesBouton.setOnAction(new EventHandler<ActionEvent>() {
 	    @Override
@@ -67,7 +75,9 @@ public class Main extends Application {
 	    }
 	});
 
-	VBox vbox = new VBox(25, compteroccurrencesBouton, creerArbreHuffmanBouton, compresserFichierBouton, decompresserFichierBouton);
+	VBox vbox = new VBox(25, compteroccurrencesBouton,
+		creerArbreHuffmanBouton, compresserFichierBouton,
+		decompresserFichierBouton);
 	vbox.setAlignment(javafx.geometry.Pos.CENTER);
 	Scene scene = new Scene(vbox, 600, 400);
 	primaryStage.setScene(scene);
@@ -77,18 +87,23 @@ public class Main extends Application {
     private void gérerCompteroccurrences() {
 	FileChooser fileChooser = new FileChooser();
 	fileChooser.setTitle("Sélectionner un fichier texte (.txt)");
-	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt");
+	FileChooser.ExtensionFilter extFilter 
+	= new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt");
 	fileChooser.getExtensionFilters().add(extFilter);
 	File fichier = fileChooser.showOpenDialog(new Stage());
 	if (fichier != null) {
 	    try {
-		String contenuFichier = GestionFichierTexte.lireFichier(fichier.getAbsolutePath());
+		String contenuFichier 
+		= GestionFichierTexte.lireFichier(fichier.getAbsolutePath());
 		if (contenuFichier == null || contenuFichier.isEmpty()) {
-		    afficherPopUpErreur("Le fichier sélectionné est vide. Veuillez sélectionner un fichier valide.");
+		    afficherPopUpErreur("Le fichier sélectionné est vide. "
+		    	+ "Veuillez sélectionner un fichier valide.");
 		    return;
 		}
-		Object[][] resultat = CompterOccurrences.compter(contenuFichier);
-		afficheroccurrencesDansTableau(resultat, contenuFichier.length());
+		Object[][] resultat 
+		= CompterOccurrences.compter(contenuFichier);
+		afficheroccurrencesDansTableau(resultat, 
+			contenuFichier.length());
 	    } catch (IOException e) {
 		e.printStackTrace();
 	    }
@@ -103,7 +118,8 @@ public class Main extends Application {
 	alert.showAndWait();
     }
 
-    private void afficheroccurrencesDansTableau(Object[][] occurrences, int totalCaracteres) {
+    private void afficheroccurrencesDansTableau(Object[][] occurrences,
+	    int totalCaracteres) {
 	Stage stage = new Stage();
 	stage.setTitle("Occurrences des caractères");
 
@@ -117,18 +133,24 @@ public class Main extends Application {
 	    data.add(new Occurrence(caractere, count, frequence));
 	}
 
-	TableColumn<Occurrence, String> caractereCol = new TableColumn<>("Caractère");
-	TableColumn<Occurrence, Integer> occurrencesCol = new TableColumn<>("Occurrences");
-	TableColumn<Occurrence, Double> frequenceCol = new TableColumn<>("Fréquence");
+	TableColumn<Occurrence, String> caractereCol 
+		= new TableColumn<>("Caractère");
+	TableColumn<Occurrence, Integer> occurrencesCol 
+		= new TableColumn<>("Occurrences");
+	TableColumn<Occurrence, Double> frequenceCol 
+		= new TableColumn<>("Fréquence");
 
-	caractereCol.setCellValueFactory(new PropertyValueFactory<>("caractere"));
-	occurrencesCol.setCellValueFactory(new PropertyValueFactory<>("occurrences"));
-	frequenceCol.setCellValueFactory(new PropertyValueFactory<>("frequence"));
+	caractereCol.setCellValueFactory(
+		new PropertyValueFactory<>("caractere"));
+	occurrencesCol.setCellValueFactory(
+		new PropertyValueFactory<>("occurrences"));
+	frequenceCol.setCellValueFactory(
+		new PropertyValueFactory<>("frequence"));
 
 	tableView.setItems(data);
-	tableView.getColumns().addAll(caractereCol, occurrencesCol, frequenceCol);
+	tableView.getColumns().addAll(caractereCol, occurrencesCol,
+		frequenceCol);
 
-	// Bind the column widths to the table width divided by the number of columns
 	tableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
 	    double tableWidth = newWidth.doubleValue();
 	    caractereCol.setPrefWidth(tableWidth / 3);
@@ -146,24 +168,31 @@ public class Main extends Application {
     private void gérerCreerArbreHuffman() {
 	FileChooser fileChooser = new FileChooser();
 	fileChooser.setTitle("Sélectionner un fichier texte (.txt)");
-	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt");
+	FileChooser.ExtensionFilter extFilter 
+	= new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt");
 	fileChooser.getExtensionFilters().add(extFilter);
 	File fichier = fileChooser.showOpenDialog(new Stage());
 	if (fichier != null) {
 	    try {
-		String contenuFichier = GestionFichierTexte.lireFichier(fichier.getAbsolutePath());
+		String contenuFichier 
+		= GestionFichierTexte.lireFichier(fichier.getAbsolutePath());
 		if (contenuFichier == null || contenuFichier.isEmpty()) {
-		    afficherPopUpErreur("Le fichier sélectionné est vide. Veuillez sélectionner un fichier valide.");
+		    afficherPopUpErreur("Le fichier sélectionné est vide. "
+		    	+ "Veuillez sélectionner un fichier valide.");
 		    return;
 		}
 		FileChooser saveFileChooser = new FileChooser();
 		saveFileChooser.setTitle("Enregistrer l'arbre Huffman");
 		saveFileChooser.setInitialFileName("dictionnaire_huffman.txt");
-		File fichierEnregistrement = saveFileChooser.showSaveDialog(new Stage());
+		File fichierEnregistrement 
+		= saveFileChooser.showSaveDialog(new Stage());
 		if (fichierEnregistrement != null) {
-		    Object[][] occurrences = CompterOccurrences.compter(contenuFichier);
-		    Noeud racine = ArbreHuffman.constructionArbreHuffman(occurrences);
-		    GestionArbreHuffman.sauvegardeArbreHuffman(racine, fichierEnregistrement.getAbsolutePath());
+		    Object[][] occurrences 
+		    = CompterOccurrences.compter(contenuFichier);
+		    Noeud racine 
+		    = ArbreHuffman.constructionArbreHuffman(occurrences);
+		    GestionArbreHuffman.sauvegardeArbreHuffman(racine, 
+			    fichierEnregistrement.getAbsolutePath());
 		}
 	    } catch (IOException e) {
 		e.printStackTrace();
@@ -174,32 +203,57 @@ public class Main extends Application {
     private void gérerCompresserFichier() {
 	FileChooser fileChooser = new FileChooser();
 	fileChooser.setTitle("Sélectionner un fichier texte (.txt)");
-	fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt"));
+	fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(
+		"Fichiers texte (*.txt)", "*.txt"));
 	File fichier = fileChooser.showOpenDialog(new Stage());
 	if (fichier != null) {
 	    try {
-		String contenuFichier = GestionFichierTexte.lireFichier(fichier.getAbsolutePath());
+		String contenuFichier 
+		= GestionFichierTexte.lireFichier(fichier.getAbsolutePath());
 		if (contenuFichier == null || contenuFichier.isEmpty()) {
-		    afficherPopUpErreur("Le fichier sélectionné est vide. Veuillez sélectionner un fichier valide.");
+		    afficherPopUpErreur("Le fichier sélectionné est vide. "
+		    	+ "Veuillez sélectionner un fichier valide.");
 		    return;
 		}
 		FileChooser dictionaryChooser = new FileChooser();
-		dictionaryChooser.setTitle("Sélectionner un dictionnaire Huffman (.txt)");
-		dictionaryChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt"));
-		File fichierDictionnaire = dictionaryChooser.showOpenDialog(new Stage());
+		dictionaryChooser.setTitle("Sélectionner un dictionnaire "
+			+ "Huffman (.txt)");
+		dictionaryChooser.getExtensionFilters().add(
+			new FileChooser.ExtensionFilter("Fichiers texte (*.txt)"
+				, "*.txt"));
+		File fichierDictionnaire 
+		= dictionaryChooser.showOpenDialog(new Stage());
 		if (fichierDictionnaire != null) {
 		    FileChooser saveFileChooser = new FileChooser();
-		    saveFileChooser.setTitle("Enregistrer le fichier compressé (.bin)");
+		    saveFileChooser.setTitle("Enregistrer le fichier compressé "
+		    	+ "(.bin)");
 		    saveFileChooser.setInitialFileName("fichier_compressé.bin");
-		    saveFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers binaires (*.bin)", "*.bin"));
-		    File fichierEnregistrement = saveFileChooser.showSaveDialog(new Stage());
+		    saveFileChooser.getExtensionFilters().add(
+			    new FileChooser.ExtensionFilter("Fichiers binaires "
+			    	+ "(*.bin)", "*.bin"));
+		    File fichierEnregistrement 
+		    = saveFileChooser.showSaveDialog(new Stage());
 		    if (fichierEnregistrement != null) {
 			long startTime = System.currentTimeMillis();
-			String lectureCompresse = Compression.compresserTexte(contenuFichier, GestionArbreHuffman.restaurerArbreHuffman(fichierDictionnaire.getAbsolutePath()));
-			GestionFichierBinaire.ecriture(lectureCompresse, fichierEnregistrement.getAbsolutePath());
-			long compressionTime = System.currentTimeMillis() - startTime;
-			double tauxCompression = TailleFichiers.tauxCompression(fichier.getAbsolutePath(), fichierEnregistrement.getAbsolutePath());
-			afficherPopUpInformations("Taux de compression : " + tauxCompression + "\nDurée de la compression : " + compressionTime + " ms");
+			String lectureCompresse 
+			= Compression.compresserTexte(contenuFichier, 
+				GestionArbreHuffman.restaurerArbreHuffman(
+					fichierDictionnaire.getAbsolutePath()));
+			GestionFichierBinaire.ecriture(lectureCompresse, 
+				fichierEnregistrement.getAbsolutePath());
+			long compressionTime 
+			= System.currentTimeMillis() - startTime;
+			double tauxCompression 
+			= TailleFichiers.tauxCompression(
+				fichier.getAbsolutePath(), 
+				fichierEnregistrement.getAbsolutePath());
+			afficherPopUpInformations("Taille du fichier d'origine"
+				+ " : " + fichier.length() + " octets" + 
+				"\nTaille du fichier décompréssé : " 
+				+ " octets" + fichierEnregistrement.length() 
+				+ "\nTaux de compression : " + tauxCompression 
+				+ "\nDurée de la compression : " 
+				+ compressionTime + " ms");
 		    }
 		}
 	    } catch (IOException e) {
@@ -211,27 +265,50 @@ public class Main extends Application {
     private void gérerDecompresserFichier() {
 	FileChooser fileChooser = new FileChooser();
 	fileChooser.setTitle("Sélectionner un fichier binaire (.bin)");
-	fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers binaires (*.bin)", "*.bin"));
+	fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(
+		"Fichiers binaires (*.bin)", "*.bin"));
 	File fichier = fileChooser.showOpenDialog(new Stage());
 	if (fichier != null) {
 	    FileChooser dictionaryChooser = new FileChooser();
-	    dictionaryChooser.setTitle("Sélectionner un dictionnaire Huffman (.txt)");
-	    dictionaryChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt"));
-	    File fichierDictionnaire = dictionaryChooser.showOpenDialog(new Stage());
+	    dictionaryChooser.setTitle("Sélectionner un dictionnaire Huffman"
+	    	+ " (.txt)");
+	    dictionaryChooser.getExtensionFilters().add(
+		    new FileChooser.ExtensionFilter("Fichiers texte (*.txt)",
+			    "*.txt"));
+	    File fichierDictionnaire 
+	    = dictionaryChooser.showOpenDialog(new Stage());
 	    if (fichierDictionnaire != null) {
 		FileChooser saveFileChooser = new FileChooser();
 		saveFileChooser.setTitle("Enregistrer le fichier décompressé");
 		saveFileChooser.setInitialFileName("fichier_decompressé.txt");
-		saveFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers texte (*.txt)", "*.txt"));
-		File fichierEnregistrement = saveFileChooser.showSaveDialog(new Stage());
+		saveFileChooser.getExtensionFilters().add(
+			new FileChooser.ExtensionFilter("Fichiers texte (*.txt)"
+				, "*.txt"));
+		File fichierEnregistrement 
+		= saveFileChooser.showSaveDialog(new Stage());
 		if (fichierEnregistrement != null) {
 		    try {
 			long startTime = System.currentTimeMillis();
-			String texteDecompresse = Decompression.decompresser(fichier.getAbsolutePath(), GestionArbreHuffman.restaurerArbreHuffman(fichierDictionnaire.getAbsolutePath()));
-			long decompressionTime = System.currentTimeMillis() - startTime;
-			GestionFichierTexte.ecrireFichier(texteDecompresse, fichierEnregistrement.getAbsolutePath());
-			double tauxDecompression = TailleFichiers.tauxCompression(fichier.getAbsolutePath(), fichierEnregistrement.getAbsolutePath());
-			afficherPopUpInformations("Taux de décompression : " + tauxDecompression + "\nDurée de la décompression : " + decompressionTime + " ms");
+			String texteDecompresse 
+			= Decompression.decompresser(fichier.getAbsolutePath(),
+				GestionArbreHuffman.restaurerArbreHuffman(
+					fichierDictionnaire.getAbsolutePath()));
+			long decompressionTime 
+			= System.currentTimeMillis() - startTime;
+			GestionFichierTexte.ecrireFichier(texteDecompresse,
+				fichierEnregistrement.getAbsolutePath());
+			double tauxDecompression 
+			= TailleFichiers.tauxCompression(
+				fichier.getAbsolutePath(), 
+				fichierEnregistrement.getAbsolutePath());
+			afficherPopUpInformations(
+				"Taille du fichier d'origine : " 
+			+ fichier.length() + " octets" + "\nTaille du fichier "
+				+ "décompréssé : " 
+			+ fichierEnregistrement.length() + " octets" 
+				+ "\nTaux de décompression : " 
+			+ tauxDecompression + "\nDurée de la décompression : " 
+				+ decompressionTime + " ms");
 		    } catch (IOException e) {
 			e.printStackTrace();
 		    }

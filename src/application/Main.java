@@ -250,7 +250,7 @@ public class Main extends Application {
 			afficherPopUpInformations("Taille du fichier d'origine"
 				+ " : " + fichier.length() + " octets" + 
 				"\nTaille du fichier décompréssé : " 
-				+ " octets" + fichierEnregistrement.length() 
+				+ fichierEnregistrement.length() + " octets" 
 				+ "\nTaux de compression : " + tauxCompression 
 				+ "\nDurée de la compression : " 
 				+ compressionTime + " ms");

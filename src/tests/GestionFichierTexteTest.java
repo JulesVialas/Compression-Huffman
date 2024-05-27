@@ -18,29 +18,29 @@ import org.junit.jupiter.api.Test;
 
 import gestion.GestionFichierTexte;
 
-public class GestionFichierTexteTest {
+class GestionFichierTexteTest {
 
     private static final String TEMP_FILE_PATH = "testFile.txt";
     private static final String FILE_CONTENT = "Ligne 1\nLigne 2\nLigne 3";
 
     @BeforeEach
-    public void setUp() throws IOException {
+    void setUp() throws IOException {
 	Files.write(Paths.get(TEMP_FILE_PATH), FILE_CONTENT.getBytes());
     }
 
     @AfterEach
-    public void tearDown() throws IOException {
+    void tearDown() throws IOException {
 	Files.deleteIfExists(Paths.get(TEMP_FILE_PATH));
     }
 
     @Test
-    public void testLireFichier() throws IOException {
+    void testLireFichier() throws IOException {
 	String contenu = GestionFichierTexte.lireFichier(TEMP_FILE_PATH);
 	assertEquals(FILE_CONTENT, contenu, "Le contenu lu ne correspond pas au contenu attendu.");
     }
 
     @Test
-    public void testEcrireFichier() throws IOException {
+    void testEcrireFichier() throws IOException {
 	String nouveauContenu = "Nouveau Contenu\nPour Test";
 	String nouveauFichierPath = "nouveauTestFile.txt";
 

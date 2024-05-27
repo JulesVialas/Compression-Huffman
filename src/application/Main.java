@@ -32,6 +32,10 @@ import huffman.CompterOccurrences;
 import huffman.Decompression;
 import huffman.Noeud;
 
+/**
+ * Main contient des méthodes pour appeler et afficher le programme
+ * grâce à une interface graphique.
+ */
 public class Main extends Application {
 
     @Override

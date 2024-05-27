@@ -36,7 +36,7 @@ class CompterOccurrencesTest {
     private static final String CARACTERES_CYRILLIQUES = "БГД";
 
     @Test
-    public void testCompterOccurencesTexteNormal() {
+    void testCompterOccurencesTexteNormal() {
 
 	for (int rang = 0; rang < TEXTE_NORMAL.length; rang++) {
 	    Object[][] resultat = CompterOccurrences.compter(TEXTE_NORMAL[rang]);
@@ -46,7 +46,7 @@ class CompterOccurrencesTest {
     }
 
     @Test
-    public static void testCompterOccurencesTexteVide() {
+    static void testCompterOccurencesTexteVide() {
 	try {
 	    assertThrows(IndexOutOfBoundsException.class, () -> {
 		CompterOccurrences.compter(TEXTE_VIDE);
@@ -57,20 +57,20 @@ class CompterOccurrencesTest {
     }
 
     @Test
-    public void testCompterOccurencesTexteNull() {
+    void testCompterOccurencesTexteNull() {
 	assertThrows(IllegalArgumentException.class, () -> {
 	    CompterOccurrences.compter(TEXTE_NULL);
 	});
     }
 
     @Test
-    public void testCompterOccurencesAvecCaracteresSpeciaux() {
+    void testCompterOccurencesAvecCaracteresSpeciaux() {
 	Object[][] resultat = CompterOccurrences.compter(CARACTERES_SPECIAUX);
 	assertEquals(9, resultat.length);
     }
 
     @Test
-    public void testCompterOccurencesAvecCaracteresSimilaires() {
+    void testCompterOccurencesAvecCaracteresSimilaires() {
 	Object[][] resultat = CompterOccurrences.compter(CARACTERES_SIMILAIRES);
 	assertEquals(3, resultat.length);
 	assertEquals('c', resultat[0][0]);
@@ -78,7 +78,7 @@ class CompterOccurrencesTest {
     }
 
     @Test
-    public void testCaracteresEtranges() {
+    void testCaracteresEtranges() {
 	try {
 	    assertThrows(IllegalArgumentException.class, () -> {
 		CompterOccurrences.compter(KATAKANAS_JAPONNAIS);

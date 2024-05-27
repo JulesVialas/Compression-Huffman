@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import huffman.Noeud;
 
-public class NoeudTest {
+class NoeudTest {
 
     @Test
-    public void testNoeud() {
+    void testNoeud() {
 	char caractere = 'a';
 	int frequence = 5;
 	Noeud noeud = new Noeud(caractere, frequence);

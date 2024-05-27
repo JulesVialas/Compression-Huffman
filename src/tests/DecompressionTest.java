@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import gestion.GestionFichierBinaire;
 import huffman.Decompression;
 
-public class DecompressionTest {
+class DecompressionTest {
 
     private static final String NOM_FICHIER_TEMPORAIRE_COMPRESSE = "testFichierCompresse.bin";
     private static final String TEXTE = "hello world";
@@ -28,17 +28,17 @@ public class DecompressionTest {
 	    { ' ', "1111" }, { 'w', "010" }, { 'r', "0111" }, { 'd', "0001" } };
 
     @BeforeEach
-    public void setUp() throws IOException {
+    void setUp() throws IOException {
 	GestionFichierBinaire.ecriture(TEXTE_COMPRESSE, NOM_FICHIER_TEMPORAIRE_COMPRESSE);
     }
 
     @AfterEach
-    public void tearDown() throws IOException {
+    void tearDown() throws IOException {
 	Files.deleteIfExists(Paths.get(NOM_FICHIER_TEMPORAIRE_COMPRESSE));
     }
 
     @Test
-    public void testDecompresser() throws IOException {
+    void testDecompresser() throws IOException {
 	File fichierCompresse = new File(NOM_FICHIER_TEMPORAIRE_COMPRESSE);
 	assertTrue(fichierCompresse.exists(), "Le fichier compressé doit exister après l'écriture.");
 

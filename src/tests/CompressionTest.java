@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import huffman.Compression;
 
-public class CompressionTest {
+class CompressionTest {
 
     private static final Object[][] DICTIONNAIRE = { { 'c', "00" }, { 'o', "01" }, { 'u', "10" } };
 

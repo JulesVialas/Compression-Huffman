@@ -1,3 +1,7 @@
+/*
+ * Occurence.java                                            TODO DATE 
+ * IUT de Rodez, pas de copyright.
+ */
 package application;
 
 public class Occurrence {

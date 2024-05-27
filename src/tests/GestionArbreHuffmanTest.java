@@ -19,14 +19,14 @@ import org.junit.jupiter.api.Test;
 import gestion.GestionArbreHuffman;
 import huffman.Noeud;
 
-public class GestionArbreHuffmanTest {
+class GestionArbreHuffmanTest {
 
     private static final String TEMP_FILE_PATH = "testArbreHuffman.txt";
 
     private Noeud racine;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
 	Noeud feuilleA = new Noeud('a', 5);
 	Noeud feuilleB = new Noeud('b', 9);
 
@@ -38,12 +38,12 @@ public class GestionArbreHuffmanTest {
     }
 
     @AfterEach
-    public void tearDown() throws IOException {
+    void tearDown() throws IOException {
 	Files.deleteIfExists(Paths.get(TEMP_FILE_PATH));
     }
 
     @Test
-    public void testSauvegardeEtRestaurerArbreHuffman() throws IOException {
+    void testSauvegardeEtRestaurerArbreHuffman() throws IOException {
 
 	GestionArbreHuffman.sauvegardeArbreHuffman(racine, TEMP_FILE_PATH);
 

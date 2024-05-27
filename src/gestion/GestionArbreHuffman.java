@@ -27,49 +27,49 @@ public class GestionArbreHuffman {
      * @param nomFichier Le nom du fichier où sauvegarder l'arbre.
      */
     public static void sauvegardeArbreHuffman(Noeud racine, String nomFichier) {
-	try (BufferedWriter contenuFichier 
+	try (BufferedWriter ecrivainFichier 
 			= new BufferedWriter(new FileWriter(nomFichier))) {
-	    parcourirArbreHuffman(racine, contenuFichier, "");
-	} catch (IOException e) {
-	    e.printStackTrace();
+	    parcourirArbreHuffman(racine, ecrivainFichier, "");
+	} catch (IOException erreurEntreeSortie) {
+	    System.out.println(erreurEntreeSortie.getMessage());
 	}
     }
 
     /**
-     * Parcourt l'arbre de Huffman et écrit chaque noeud dans le
+     * Parcours l'arbre de Huffman et écrit chaque noeud dans le
      * fichier.
      *
-     * @param noeud Le noeud actuel de l'arbre.
-     * @param contenuFichier L'écrivain pour le fichier de sortie.
-     * @param codeHuffman Le code Huffman pour le noeud actuel.
+     * @param noeud noeud actuel de l'arbre.
+     * @param ecrivainFichier ecrivain du contenu du dictionnaire.
+     * @param codeHuffman code Huffman pour le noeud actuel.
      * @throws IOException Si une erreur d'entrée 
      * 			   ou de sortie survient.
      */
     private static void parcourirArbreHuffman
-    		(Noeud noeud, BufferedWriter contenuFichier, String codeHuffman)
+    		(Noeud noeud, BufferedWriter ecrivainFichier, String codeHuffman)
 	    throws IOException {
 	if (noeud == null) {
 	    return;
 	}
 	if (noeud.getGauche() == null && noeud.getDroite() == null) {
 	    if (noeud.getCaractere() == '\n') {
-		contenuFichier.write(
+		ecrivainFichier.write(
 			"codeHuffman = " + codeHuffman + " ; encode = " 
-		+ Integer.toBinaryString('\n') + " ; symbole = ↲\n");
+		+ Integer.toBinaryString('\n') + " ; symbole = VT\n"); //VT = saut de ligne
 	    } else if (noeud.getCaractere() == ' ') {
-		contenuFichier.write(
+		ecrivainFichier.write(
 			"codeHuffman = " + codeHuffman + " ; encode = " 
-		+ Integer.toBinaryString(' ') + " ; symbole = ␣\n");
+		+ Integer.toBinaryString(' ') + " ; symbole = CF\n");  //CF = espace
 	    } else {
-		contenuFichier.write("codeHuffman = " + codeHuffman 
+		ecrivainFichier.write("codeHuffman = " + codeHuffman 
 			+ " ; encode = " 
 			+ Integer.toBinaryString(noeud.getCaractere())
 			+ " ; symbole = " + noeud.getCaractere() + "\n");
 	    }
 	}
-	parcourirArbreHuffman(noeud.getGauche(), contenuFichier, codeHuffman 
+	parcourirArbreHuffman(noeud.getGauche(), ecrivainFichier, codeHuffman 
 		+ "0");
-	parcourirArbreHuffman(noeud.getDroite(), contenuFichier, codeHuffman 
+	parcourirArbreHuffman(noeud.getDroite(), ecrivainFichier, codeHuffman 
 		+ "1");
 
     }
@@ -115,9 +115,9 @@ public class GestionArbreHuffman {
      */
     private static char decoderSymbole(String caractere) {
 	switch (caractere) {
-	case "↲":
+	case "VT":
 	    return '\n';
-	case "␣":
+	case "CF":
 	    return ' ';
 	default:
 	    return caractere.length() == 1 ? caractere.charAt(0) : '\0';

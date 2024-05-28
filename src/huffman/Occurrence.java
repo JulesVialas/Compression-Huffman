@@ -2,7 +2,7 @@
  * Occurence.java                                            TODO DATE 
  * IUT de Rodez, pas de copyright.
  */
-package application;
+package huffman;
 
 /**
  * TODO commenter la responsabilité de cette classe (SRP)

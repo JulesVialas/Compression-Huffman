@@ -31,6 +31,7 @@ import huffman.Compression;
 import huffman.CompterOccurrences;
 import huffman.Decompression;
 import huffman.Noeud;
+import huffman.Occurrence;
 
 /**
  * Main contient des méthodes pour appeler et afficher le programme

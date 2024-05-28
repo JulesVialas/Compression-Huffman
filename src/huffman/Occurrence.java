@@ -1,48 +1,55 @@
 /*
- * Occurence.java                                            TODO DATE 
+ * Occurrence.java                                            TODO DATE
  * IUT de Rodez, pas de copyright.
  */
 package huffman;
 
 /**
- * TODO commenter la responsabilité de cette classe (SRP)
+ * Cette classe représente une occurrence d'un caractère dans un contexte donné.
+ * Elle encapsule les informations relatives à ce caractère, à savoir le
+ * caractère lui-même, le nombre d'occurrences de ce caractère et sa fréquence
+ * dans le contexte.
  */
 public class Occurrence {
-    private final String caractere;
+    private final char caractere;
     private final int occurrences;
     private final double frequence;
 
     /**
-     * TODO commenter l'état initial obtenu
-     * @param caractere
-     * @param occurrences
-     * @param frequence
+     * Initialise une occurrence avec les paramètres spécifiés.
+     *
+     * @param caractere   Le caractère concerné par cette occurrence.
+     * @param occurrences Le nombre d'occurrences du caractère dans le contexte.
+     * @param frequence   La fréquence du caractère dans le contexte.
      */
-    public Occurrence(String caractere, int occurrences, double frequence) {
+    public Occurrence(char caractere, int occurrences, double frequence) {
 	this.caractere = caractere;
 	this.occurrences = occurrences;
 	this.frequence = frequence;
     }
 
     /**
-     * TODO commenter le rôle de cette méthode
-     * @return caractere
+     * Récupère le caractère associé à cette occurrence.
+     *
+     * @return Le caractère associé à cette occurrence.
      */
-    public String getCaractere() {
+    public char getCaractere() {
 	return caractere;
     }
 
     /**
-     * TODO commenter le rôle de cette méthode
-     * @return occurrences
+     * Récupère le nombre d'occurrences du caractère dans le contexte.
+     *
+     * @return Le nombre d'occurrences du caractère dans le contexte.
      */
     public int getOccurrences() {
 	return occurrences;
     }
 
     /**
-     * TODO commenter le rôle de cette méthode
-     * @return frequence
+     * Récupère la fréquence du caractère dans le contexte.
+     *
+     * @return La fréquence du caractère dans le contexte.
      */
     public double getFrequence() {
 	return frequence;

@@ -5,20 +5,19 @@
 package huffman;
 
 /**
- * Compression contient des méthodes pour compresser des
- * chaînes de caractère via le code Huffman obtenu lors de la 
- * construction de L'arbre Huffman
+ * Compression contient des méthodes pour compresser des chaînes de caractère
+ * via le code Huffman obtenu lors de la construction de L'arbre Huffman
  */
 public class Compression {
 
     /**
      * Compresse un fichier grâce à son code Huffman
      *
-     * @param texte chaîne de caractère à compresser
+     * @param texte        chaîne de caractère à compresser
      * @param dictionnaire arbre de Huffman du fichier donnée
      * @return texte compressé
      */
-    public static String compresserTexte(String texte, Object[][] dictionnaire){
+    public static String compresserTexte(String texte, Object[][] dictionnaire) {
 	if (texte == null || texte.isEmpty()) {
 	    throw new IllegalArgumentException("Le texte est vide ou null");
 	}
@@ -30,16 +29,16 @@ public class Compression {
 	}
 	return codeBinaire.toString();
     }
+
     /**
      * Refonte de l'arbre Huffman pour effectuer la compression
      *
-     * @param caractere caractère dont on veut le code huffman
-     * @param dictionnaire 
-     * @return Si le caractère est trouvé dans le dictionnaire le
-     * 		code huffman. Sinon rien n'est retourné.
+     * @param caractere    caractère dont on veut le code huffman
+     * @param dictionnaire
+     * @return Si le caractère est trouvé dans le dictionnaire le code huffman.
+     *         Sinon rien n'est retourné.
      */
-    public static String trouverCodeHuffman(char caractere, 
-	    					Object[][] dictionnaire) {
+    public static String trouverCodeHuffman(char caractere, Object[][] dictionnaire) {
 	for (Object[] element : dictionnaire) {
 	    if (element[0] != null && caractere == (char) element[0]) {
 		return element[1].toString();

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controlleur">
+    <children>
+        <TableView fx:id="tableView" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="charColumn" text="Caractère">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="caractere"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="occurrenceColumn" text="Occurrences">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="occurrences"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="frequenceColumn" text="Fréquence">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="frequence"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <Button layoutX="14.0" layoutY="230.0" mnemonicParsing="false" onAction="#compterOccurrences" text="Compter Occurrences" />
+        <Button layoutX="150.0" layoutY="230.0" mnemonicParsing="false" onAction="#créerArbreHuffman" text="Créer Arbre Huffman" />
+        <Button layoutX="300.0" layoutY="230.0" mnemonicParsing="false" onAction="#compresserFichier" text="Compresser Fichier" />
+        <Button layoutX="450.0" layoutY="230.0" mnemonicParsing="false" onAction="#decompresserFichier" text="Décompresser Fichier" />
+    </children>
+</AnchorPane>

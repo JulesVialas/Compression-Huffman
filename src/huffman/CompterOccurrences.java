@@ -5,116 +5,86 @@
 
 package huffman;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * CompterOccurrences contient des méthodes pour compter
- * les occurrences des caractères dans un texte et retourner un
- * tableau d'objets trié par fréquence d'occurrences.
- */	
+ * CompterOccurrences contient des méthodes pour compter les occurrences des
+ * caractères dans un texte et retourner une liste d'objets Occurrence triée par
+ * fréquence d'occurrences.
+ */
 public class CompterOccurrences {
 
+    private static final int MAX_UNICODE = 1114112;
+
     /**
-     * Compte les occurrences de chaque caractère dans un texte 
-     * donné.
+     * Compte les occurrences de chaque caractère dans un texte donné.
      *
-     * @param texte	le texte dont on veut compter les occurrences
-     * 			des caractères
-     * @return un tableau d'objets contenant les caractères et leurs 
-     * 	       occurrences triées par ordre croissant des fréquences
+     * @param texte le texte dont on veut compter les occurrences des caractères
+     * @return une liste d'objets Occurrence contenant les caractères et leurs
+     *         occurrences triées par ordre croissant des fréquences
      */
-    public static Object[][] compter(String texte) {
-	testValide(texte);
-	int[] tableauOccurrences = new int[127];
-	Object[][] resultat = remplirTableau(texte, tableauOccurrences);
-	return triInsertionCroissant(resultat);
+    public static List<Occurrence> compter(String texte) {
+	verifierTexteValide(texte);
+	int[] tableauOccurrences = new int[MAX_UNICODE + 1];
+	List<Occurrence> resultat = remplirListeOccurrences(texte, tableauOccurrences);
+	return trierParFrequence(resultat);
     }
 
     /**
-     * Vérifie si le texte est valide.
-     * Le texte est invalide s'il est null, vide ou s'il contient des 
-     * caractères non pris en charge.
+     * Vérifie si le texte est valide. Le texte est invalide s'il est null ou vide.
      *
-     * @param texte	le texte à vérifier
-     * @throws IllegalArgumentException si le texte est null, vide ou
-     *	       contient des caractères non pris en charge
+     * @param texte le texte à vérifier
+     * @throws IllegalArgumentException si le texte est null ou vide
      */
-    private static void testValide(String texte) {
+    private static void verifierTexteValide(String texte) {
 	if (texte == null || texte.isEmpty()) {
 	    throw new IllegalArgumentException("Le texte est vide ou null");
 	}
-	for (char caractere : texte.toCharArray()) {
-	    if (caractere > '\u007F' || caractere < '\u0000') {
-		throw new IllegalArgumentException("Le caractère n'est pas pris"
-			+ " en charge");
-	    }
-	}
     }
 
     /**
-     * Remplit un tableau avec les caractères et leurs occurrences.
+     * Remplit une liste avec les caractères et leurs occurrences.
      *
-     * @param texte	le texte dont on veut compter les occurrences
-     * @param occurrences   le tableau des occurrences des caractères
-     * @return un tableau d'objets contenant les caractères et leurs
-     * 	       occurrences
+     * @param texte       le texte dont on veut compter les occurrences
+     * @param occurrences le tableau des occurrences des caractères
+     * @return une liste d'objets Occurrence contenant les caractères et leurs
+     *         occurrences
      */
-    private static Object[][] remplirTableau(String texte, int[] Occurrences) {
-	int index = 0;
-	int tailleTableau = rechercheTailleTableau(texte);
-	Object[][] tableau = new Object[tailleTableau][2];
+    private static List<Occurrence> remplirListeOccurrences(String texte, int[] occurrences) {
+	int longueurTexte = texte.length();
 	for (int rang = 0; rang < texte.length(); rang++) {
 	    char caractere = texte.charAt(rang);
-	    Occurrences[caractere]++;
+	    occurrences[caractere]++;
 	}
 
-	for (int rang = 0; rang < Occurrences.length; rang++) {
-	    if (Occurrences[rang] > 0) {
-		tableau[index][0] = (char) rang;
-		tableau[index][1] = Occurrences[rang];
-		index++;
+	List<Occurrence> liste = new ArrayList<>();
+	for (int rang = 0; rang <= MAX_UNICODE; rang++) {
+	    if (occurrences[rang] > 0) {
+		char caractere = (char) rang;
+		double frequence = (double) occurrences[rang] / longueurTexte;
+		liste.add(new Occurrence(caractere, occurrences[rang], frequence));
 	    }
 	}
-	return tableau;
+	return liste;
     }
 
     /**
-     * Recherche la taille nécessaire pour le tableau d'occurrences.
+     * Trie la liste d'occurrences en ordre croissant de fréquence des caractères.
      *
-     * @param texte 	le texte dont on veut compter les occurrences
-     * @return la taille du tableau d'occurrences
+     * @param liste la liste d'objets Occurrence à trier
+     * @return la liste triée d'objets Occurrence
      */
-    private static int rechercheTailleTableau(String texte) {
-	int[] OccurrencesTemporaires = new int[127];
-	int compteurCaracteresUniques = 0;
-	for (int rang = 0; rang < texte.length(); rang++) {
-	    char caractere = texte.charAt(rang);
-	    OccurrencesTemporaires[caractere]++;
-	}
-	for (int rang = 0; rang < 127; rang++) {
-	    if (OccurrencesTemporaires[rang] > 0) {
-		compteurCaracteresUniques++;
-	    }
-	}
-	return compteurCaracteresUniques;
-    }
-
-    /**
-     * Trie le tableau d'occurrences en ordre croissant de fréquence
-     * des caractères.
-     *
-     * @param tableau 	le tableau d'objets à trier
-     * @return le tableau trié d'objets
-     */
-    private static Object[][] triInsertionCroissant(Object[][] tableau) {
-	for (int rang = 1; rang < tableau.length; rang++) {
-	    Object[] temp = tableau[rang];
+    private static List<Occurrence> trierParFrequence(List<Occurrence> liste) {
+	for (int rang = 1; rang < liste.size(); rang++) {
+	    Occurrence element = liste.get(rang);
 	    int secondRang = rang - 1;
-	    while (secondRang >= 0 
-		    && (int) tableau[secondRang][1] >= (int) temp[1]) {
-		tableau[secondRang + 1] = tableau[secondRang];
-		secondRang--;
+	    while (secondRang >= 0 && liste.get(secondRang).getOccurrences() > element.getOccurrences()) {
+		liste.set(secondRang + 1, liste.get(secondRang));
+		secondRang = secondRang - 1;
 	    }
-	    tableau[secondRang + 1] = temp;
+	    liste.set(secondRang + 1, element);
 	}
-	return tableau;
+	return liste;
     }
 }

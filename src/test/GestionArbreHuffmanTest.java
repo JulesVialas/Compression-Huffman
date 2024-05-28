@@ -2,7 +2,7 @@
  * GestonArbreHuffmanTest.java                               	12 mai 2024
  * IUT de Rodez, pas de copyright.
  */
-package tests;
+package test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,8 +30,7 @@ class GestionArbreHuffmanTest {
 	Noeud feuilleA = new Noeud('a', 5);
 	Noeud feuilleB = new Noeud('b', 9);
 
-	Noeud noeudInterne = new Noeud('\0', feuilleA.getFrequence() 
-		+ feuilleB.getFrequence());
+	Noeud noeudInterne = new Noeud('\0', feuilleA.getFrequence() + feuilleB.getFrequence());
 	noeudInterne.setGauche(feuilleA);
 	noeudInterne.setDroite(feuilleB);
 
@@ -49,16 +48,13 @@ class GestionArbreHuffmanTest {
 	GestionArbreHuffman.sauvegardeArbreHuffman(racine, TEMP_FILE_PATH);
 
 	File fichierSauvegarde = new File(TEMP_FILE_PATH);
-	assertTrue(fichierSauvegarde.exists(), "Le fichier de sauvegarde "
-		+ "devrait exister.");
+	assertTrue(fichierSauvegarde.exists(), "Le fichier de sauvegarde " + "devrait exister.");
 
-	Object[][] dictionnaire = GestionArbreHuffman.restaurerArbreHuffman(
-		TEMP_FILE_PATH);
+	Object[][] dictionnaire = GestionArbreHuffman.restaurerArbreHuffman(TEMP_FILE_PATH);
 
 	Object[][] dictionnaireAttendu = { { 'a', "0" }, { 'b', "1" } };
 
 	assertArrayEquals(dictionnaireAttendu, dictionnaire,
-		"Le dictionnaire restauré ne correspond pas au dictionnaire "
-			+ "attendu.");
+		"Le dictionnaire restauré ne correspond pas au dictionnaire " + "attendu.");
     }
 }

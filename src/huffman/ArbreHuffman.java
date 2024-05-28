@@ -8,39 +8,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ArbreHuffman contient des méthodes pour construire un 
- * arbre de Huffman à partir des occurrences des caractères d'un 
- * fichier.
+ * ArbreHuffman contient des méthodes pour construire un arbre de Huffman à
+ * partir des occurrences des caractères d'un fichier.
  */
 public class ArbreHuffman {
 
     /**
-     * Construit un arbre de Huffman à partir d'un tableau
-     * d'occurrences de caractères.
+     * Construit un arbre de Huffman à partir d'une liste d'occurrences de
+     * caractères.
      *
-     * @param occurrences un tableau d'objets où chaque élément est
-     * 			  un tableau contenant un caractère et sa 
-     * 			  fréquence d'occurrence
+     * @param occurrences une liste d'objets où chaque élément est une occurrence
+     *                    représentée par un objet Occurrence
      * @return la racine de l'arbre de Huffman construit
      */
-    public static Noeud constructionArbreHuffman(Object[][] occurrences) {
+    public static Noeud constructionArbreHuffman(List<Occurrence> occurrences) {
 	List<Noeud> listeNoeuds = new ArrayList<>();
-	for (Object[] occurrence : occurrences) {
-	    char caractere = (char) occurrence[0];
-	    int frequence = (int) occurrence[1];
-	    listeNoeuds.add(new Noeud(caractere, frequence));
+	for (Occurrence occurrence : occurrences) {
+	    listeNoeuds.add(new Noeud(occurrence.getCaractere(), occurrence.getOccurrences()));
 	}
 	while (listeNoeuds.size() > 1) {
 	    Noeud droite = listeNoeuds.remove(0);
 	    Noeud gauche = listeNoeuds.remove(0);
-	    Noeud parent = new Noeud('\0', gauche.getFrequence() 
-		    				+ droite.getFrequence());
+	    Noeud parent = new Noeud('\0', gauche.getFrequence() + droite.getFrequence());
 	    parent.setGauche(gauche);
 	    parent.setDroite(droite);
 	    int insertionIndex = 0;
 	    while (insertionIndex < listeNoeuds.size()
-		    && listeNoeuds.get(insertionIndex).getFrequence() 
-		    				    < parent.getFrequence()) {
+		    && listeNoeuds.get(insertionIndex).getFrequence() < parent.getFrequence()) {
 		insertionIndex++;
 	    }
 	    listeNoeuds.add(insertionIndex, parent);

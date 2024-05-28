@@ -2,31 +2,30 @@
  * ArbreHuffmanTest.java                                            02 mai 2024
  * IUT de Rodez, pas de copyright.
  */
-package tests;
+package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import huffman.ArbreHuffman;
 import huffman.CompterOccurrences;
 import huffman.Noeud;
+import huffman.Occurrence;
 
 class ArbreHuffmanTest {
 
-    private static final Object[][] OCCURRENCES =
-	    CompterOccurrences.compter("Bonjour a tous");
+    private static final List<Occurrence> OCCURRENCES = CompterOccurrences.compter("Bonjour a tous");
 
-    private static final Object[][] UNE_OCCURRENCE = 
-	    CompterOccurrences.compter("aaaaa");
+    private static final List<Occurrence> UNE_OCCURRENCE = CompterOccurrences.compter("aaaaa");
 
-    private static final Object[][] OCCURRENCES_NON_REPETEES = 
-	    CompterOccurrences.compter("abcdefghij");
+    private static final List<Occurrence> OCCURRENCES_NON_REPETEES = CompterOccurrences.compter("abcdefghij");
 
-    private static final Object[][] OCCURRENCES_EGALES =
-	    CompterOccurrences.compter("aabbccddee");
+    private static final List<Occurrence> OCCURRENCES_EGALES = CompterOccurrences.compter("aabbccddee");
 
     @Test
     void testConstructionArbreHuffmanAvecOccurrencesRepetees() {
@@ -48,8 +47,7 @@ class ArbreHuffmanTest {
 
     @Test
     void testConstructionArbreHuffmanAvecOccurrencesNonRepetees() {
-	Noeud root4 = ArbreHuffman.constructionArbreHuffman(
-		OCCURRENCES_NON_REPETEES);
+	Noeud root4 = ArbreHuffman.constructionArbreHuffman(OCCURRENCES_NON_REPETEES);
 	assertNotNull(root4);
 	assertTrue(estArbreHuffmanValide(root4));
     }
@@ -62,15 +60,12 @@ class ArbreHuffmanTest {
     }
 
     private boolean estArbreHuffmanValide(Noeud noeud) {
-	if ((noeud == null) || (noeud.getGauche() == null && noeud.getDroite()
-		== null)) {
+	if ((noeud == null) || (noeud.getGauche() == null && noeud.getDroite() == null)) {
 	    return true;
 	}
 	if (noeud.getGauche() != null && noeud.getDroite() != null) {
-	    return noeud.getFrequence() == (noeud.getGauche().getFrequence() 
-		    + noeud.getDroite().getFrequence())
-		    && estArbreHuffmanValide(noeud.getGauche()) && 
-		    estArbreHuffmanValide(noeud.getDroite());
+	    return noeud.getFrequence() == (noeud.getGauche().getFrequence() + noeud.getDroite().getFrequence())
+		    && estArbreHuffmanValide(noeud.getGauche()) && estArbreHuffmanValide(noeud.getDroite());
 	}
 	return false;
     }

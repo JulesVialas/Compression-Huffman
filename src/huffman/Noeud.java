@@ -5,9 +5,9 @@
 package huffman;
 
 /**
- * Noeud représente un noeud dans un arbre de Huffman.
- * Chaque noeud contient un caractère, une fréquence, ainsi que des 
- * références vers les noeuds enfants gauche et droit.
+ * Noeud représente un noeud dans un arbre de Huffman. Chaque noeud contient un
+ * caractère, une fréquence, ainsi que des références vers les noeuds enfants
+ * gauche et droit.
  */
 public class Noeud {
     private char caractere;
@@ -50,7 +50,7 @@ public class Noeud {
     /**
      * Définit le noeud enfant gauche.
      *
-     * @param gauche	le noeud enfant gauche à définir
+     * @param gauche le noeud enfant gauche à définir
      */
     public void setGauche(Noeud gauche) {
 	this.gauche = gauche;
@@ -66,7 +66,7 @@ public class Noeud {
     /**
      * Définit le noeud enfant droit.
      *
-     * @param droite	le noeud enfant droit à définir
+     * @param droite le noeud enfant droit à définir
      */
     public void setDroite(Noeud droite) {
 	this.droite = droite;

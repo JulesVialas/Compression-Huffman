@@ -1,3 +1,7 @@
+/*
+ * GestonFichierBinaireTest.java                              26 mai 2024
+ * IUT de Rodez, pas de copyright.
+ */
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,33 +18,37 @@ import org.junit.jupiter.api.Test;
 
 import gestion.GestionFichierBinaire;
 
-public class GestionFichierBinaireTest {
+class GestionFichierBinaireTest {
 
     private static final String TEMP_FILE_PATH = "testFichierBinaire.bin";
-    private static final String STRING_BINAIRE = "10101010110011001100110010101010";
+    private static final String STRING_BINAIRE = "1010101011001100"
+    	+ "1100110010101010";
 
     @BeforeEach
-    public void setUp() throws IOException {
+    void setUp() throws IOException {
 	GestionFichierBinaire.ecriture(STRING_BINAIRE, TEMP_FILE_PATH);
     }
 
     @AfterEach
-    public void tearDown() throws IOException {
+    void tearDown() throws IOException {
 	Files.deleteIfExists(Paths.get(TEMP_FILE_PATH));
     }
 
     @Test
-    public void testLecture() throws IOException {
+    void testLecture() throws IOException {
 	String contenuLu = GestionFichierBinaire.lecture(TEMP_FILE_PATH);
-	assertEquals(STRING_BINAIRE, contenuLu, "Le contenu lu doit correspondre au contenu écrit.");
+	assertEquals(STRING_BINAIRE, contenuLu, "Le contenu lu doit "
+		+ "correspondre au contenu écrit.");
     }
 
     @Test
-    public void testEcriture() throws IOException {
+    void testEcriture() throws IOException {
 	File fichierBinaire = new File(TEMP_FILE_PATH);
-	assertTrue(fichierBinaire.exists(), "Le fichier binaire doit exister après l'écriture.");
+	assertTrue(fichierBinaire.exists(), "Le fichier binaire doit exister "
+		+ "après l'écriture.");
 
 	String contenuLu = GestionFichierBinaire.lecture(TEMP_FILE_PATH);
-	assertEquals(STRING_BINAIRE, contenuLu, "Le contenu lu doit correspondre au contenu écrit.");
+	assertEquals(STRING_BINAIRE, contenuLu, "Le contenu lu doit correspondre"
+		+ " au contenu écrit.");
     }
 }

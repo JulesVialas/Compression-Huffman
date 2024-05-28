@@ -1,5 +1,5 @@
 /*
- * CompterOccurrences.java                                            22 avril 2024
+ * CompterOccurrences.java                                        22 avril 2024
  * IUT de Rodez, pas de copyright.
  */
 

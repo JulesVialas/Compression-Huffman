@@ -1,3 +1,7 @@
+/*
+ * Programme.java                                        20 mai 2024
+ * IUT de Rodez, pas de copyright.
+ */
 package application;
 
 import java.io.IOException;
@@ -12,8 +16,15 @@ import huffman.CompterOccurrences;
 import huffman.Decompression;
 import huffman.Noeud;
 
+/**
+ * TODO commenter la responsabilité de cette classe (SRP)
+ */
 public class Programme {
 
+    /**
+     * TODO commenter le rôle de cette méthode
+     * @param args
+     */
     public static void main(String[] args) {
 	String lecture = "";
 	String arbreHuffman = "";
@@ -26,7 +37,8 @@ public class Programme {
 	    e.printStackTrace();
 	}
 
-	System.out.println("Résultat de compterOccurrences de " + nomFichier + ".txt : ");
+	System.out.println("Résultat de compterOccurrences de " + nomFichier 
+		+ ".txt : ");
 	Object[][] occurrences = CompterOccurrences.compter(lecture);
 
 	for (Object[] element : occurrences) {
@@ -39,16 +51,19 @@ public class Programme {
 	    }
 
 	    System.out.println(
-		    caractere + " : " + element[1] + " : " + (double) (int) element[1] / occurrences.length + " % ");
+		    caractere + " : " + element[1] + " : " + (double) (int)
+		    element[1] / lecture.length()); 
 	}
 
 	System.out.println("Construction de l'arbre huffman ...");
 	Noeud racine = ArbreHuffman.constructionArbreHuffman(occurrences);
 
 	System.out.println("Résultat de la sauvegarde de l'arbre huffman : ");
-	GestionArbreHuffman.sauvegardeArbreHuffman(racine, "arbreHuffman" + nomFichier + ".txt");
+	GestionArbreHuffman.sauvegardeArbreHuffman(racine, "arbreHuffman" 
+		+ nomFichier + ".txt");
 	try {
-	    arbreHuffman = GestionFichierTexte.lireFichier("arbreHuffman" + nomFichier + ".txt");
+	    arbreHuffman = GestionFichierTexte.lireFichier("arbreHuffman"
+		    + nomFichier + ".txt");
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
@@ -57,7 +72,8 @@ public class Programme {
 	Object[][] arbreRestaure = null;
 	System.out.println("Résultat de la restauration de l'arbre huffman : ");
 	try {
-	    arbreRestaure = GestionArbreHuffman.restaurerArbreHuffman("arbreHuffman" + nomFichier + ".txt");
+	    arbreRestaure = GestionArbreHuffman.restaurerArbreHuffman(
+		    "arbreHuffman" + nomFichier + ".txt");
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
@@ -66,29 +82,38 @@ public class Programme {
 	    System.out.println(caractere + " : " + element[1]);
 	}
 
-	System.out.println("Resultat de la compression de " + nomFichier + ".txt");
+	System.out.println("Resultat de la compression de " + nomFichier 
+		+ ".txt");
 	long startTime = System.currentTimeMillis();
-	String lectureCompresse = Compression.compresserTexte(lecture, arbreRestaure);
+	String lectureCompresse = Compression.compresserTexte(
+		lecture, arbreRestaure);
 	try {
-	    GestionFichierBinaire.ecriture(lectureCompresse, nomFichier + ".bin");
+	    GestionFichierBinaire.ecriture(lectureCompresse, nomFichier 
+		    + ".bin");
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
 	long compressionTime = System.currentTimeMillis() - startTime;
 	System.out.println(lectureCompresse + "");
 	System.out.println(
-		"Taux de compression " + TailleFichiers.tauxCompression(nomFichier + ".txt", nomFichier + ".bin"));
-	System.out.println("Durée de la compression : " + compressionTime + " ms");
+		"Taux de compression " + TailleFichiers.tauxCompression(
+			nomFichier + ".txt", nomFichier + ".bin"));
+	System.out.println("Durée de la compression : " + compressionTime
+		+ " ms");
 
 	System.out.println("Resultat de la decompression de coucou.bin : ");
 	startTime = System.currentTimeMillis();
-	String texteDecompresse = Decompression.decompresser("coucou.bin", arbreRestaure);
-	GestionFichierTexte.ecrireFichier(texteDecompresse, nomFichier + "Decompresse.txt");
+	String texteDecompresse = Decompression.decompresser(
+		"coucou.bin", arbreRestaure);
+	GestionFichierTexte.ecrireFichier(texteDecompresse, nomFichier 
+		+ "Decompresse.txt");
 	long decompressionTime = System.currentTimeMillis() - startTime;
 	System.out.println(texteDecompresse);
 	System.out.println("Taux de decompression "
-		+ TailleFichiers.tauxCompression(nomFichier + ".txt", nomFichier + "Decompresse.txt"));
-	System.out.println("Durée de la decompression : " + decompressionTime + " ms");
+		+ TailleFichiers.tauxCompression(nomFichier + ".txt",
+			nomFichier + "Decompresse.txt"));
+	System.out.println("Durée de la decompression : " + decompressionTime 
+		+ " ms");
 	System.out.println("Ecriture de " + nomFichier + ".txt");
     }
 }

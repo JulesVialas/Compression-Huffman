@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Noeud contient des méthodes pour construire un arbre de Huffman à partir des
- * occurrences des caractères d'un fichier.
+ * Noeud contient des méthodes pour construire un arbre de Huffman
+ *  à partir des occurrences des caractères d'un fichier.
  */
 public class Noeud {
     private char caractere;
@@ -89,28 +89,34 @@ public class Noeud {
     }
 
     /**
-     * Construit un arbre de Huffman à partir d'une liste d'occurrences de
-     * caractères.
+     * Construit un arbre de Huffman à partir d'une liste 
+     * d'occurrences de caractères.
      *
-     * @param occurrences une liste d'objets où chaque élément est une occurrence
-     *                    représentée par un objet Occurrence
+     * @param occurrences une liste d'objets où chaque élément est 
+     *                    une occurrence représentée par un objet 
+     *                    Occurrence
      * @return la racine de l'arbre de Huffman construit
      */
     public static Noeud constructionArbreHuffman(List<Occurrence> occurrences) {
 	List<Noeud> listeNoeuds = new ArrayList<>();
 	for (Occurrence occurrence : occurrences) {
-	    listeNoeuds.add(new Noeud(occurrence.getCaractere(), occurrence.getOccurrences()));
+	    listeNoeuds.add(new Noeud(occurrence.getCaractere(),
+		    occurrence.getOccurrences()));
 	}
 	while (listeNoeuds.size() > 1) {
 	    // Trier les noeuds par fréquence
-	    listeNoeuds.sort((a, b) -> Integer.compare(a.getFrequence(), b.getFrequence()));
+	    listeNoeuds.sort((a, b) -> Integer.compare(a.getFrequence(), 
+		    b.getFrequence()));
 
-	    // Extraire les deux noeuds avec les fréquences les plus basses
+	    /* Extraire les deux noeuds avec les fréquences les plus
+	       basses*/
 	    Noeud gauche = listeNoeuds.remove(0);
 	    Noeud droite = listeNoeuds.remove(0);
 
-	    // Créer un nouveau noeud parent avec ces deux noeuds comme enfants
-	    Noeud parent = new Noeud(gauche.getFrequence() + droite.getFrequence(), gauche, droite);
+	    /* Créer un nouveau noeud parent avec ces deux noeuds 
+	       comme enfants */
+	    Noeud parent = new Noeud(gauche.getFrequence() 
+		    + droite.getFrequence(), gauche, droite);
 
 	    // Ajouter le nouveau noeud parent à la liste
 	    listeNoeuds.add(parent);

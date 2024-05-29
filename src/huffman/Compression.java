@@ -5,8 +5,9 @@
 package huffman;
 
 /**
- * Compression contient des méthodes pour compresser des chaînes de caractère
- * via le code Huffman obtenu lors de la construction de L'arbre Huffman
+ * Compression contient des méthodes pour compresser des chaînes de
+ * caractères via le code Huffman obtenu lors de la construction 
+ * de l'arbre Huffman
  */
 public class Compression {
 
@@ -35,8 +36,8 @@ public class Compression {
      *
      * @param caractere    caractère dont on veut le code huffman
      * @param dictionnaire
-     * @return Si le caractère est trouvé dans le dictionnaire le code huffman.
-     *         Sinon rien n'est retourné.
+     * @return Si le caractère est trouvé dans le dictionnaire le 
+     *         code Huffman. Sinon rien n'est retourné.
      */
     public static String trouverCodeHuffman(char caractere, Object[][] dictionnaire) {
 	for (Object[] element : dictionnaire) {

@@ -15,8 +15,8 @@ import java.util.List;
 import huffman.Noeud;
 
 /**
- * GestionArbreHuffman contient des méthodes pour sauvegarder et restaurer des
- * arbres de Huffman à partir de fichiers.
+ * GestionArbreHuffman contient des méthodes pour sauvegarder et
+ * restaurer des arbres de Huffman à partir de fichiers.
  */
 public class GestionArbreHuffman {
 
@@ -27,7 +27,8 @@ public class GestionArbreHuffman {
      * @param nomFichier Le nom du fichier où sauvegarder l'arbre.
      */
     public static void sauvegardeArbreHuffman(Noeud racine, String nomFichier) {
-	try (BufferedWriter ecrivainFichier = new BufferedWriter(new FileWriter(nomFichier))) {
+	try (BufferedWriter ecrivainFichier 
+			= new BufferedWriter(new FileWriter(nomFichier))) {
 	    parcourirArbreHuffman(racine, ecrivainFichier, "");
 	} catch (IOException erreurEntreeSortie) {
 	    System.out.println(erreurEntreeSortie.getMessage());
@@ -35,47 +36,59 @@ public class GestionArbreHuffman {
     }
 
     /**
-     * Parcours l'arbre de Huffman et écrit chaque noeud dans le fichier.
+     * Parcours l'arbre de Huffman et écrit chaque noeud dans le
+     * fichier.
      *
      * @param racine          noeud actuel de l'arbre.
      * @param ecrivainFichier ecrivain du contenu du dictionnaire.
      * @param codeHuffman     code Huffman pour le noeud actuel.
-     * @throws IOException Si une erreur d'entrée ou de sortie survient.
+     * @throws IOException Si une erreur d'entrée ou de sortie
+     * 			   survient.
      */
-    private static void parcourirArbreHuffman(Noeud racine, BufferedWriter ecrivainFichier, String codeHuffman)
+    private static void parcourirArbreHuffman(Noeud racine,
+	    		BufferedWriter ecrivainFichier, String codeHuffman)
 	    throws IOException {
 	if (racine == null) {
 	    return;
 	}
 	if (racine.getGauche() == null && racine.getDroite() == null) {
 	    if (racine.getCaractere() == '\n') {
-		ecrivainFichier.write("codeHuffman = " + codeHuffman + " ; encode = " + Integer.toBinaryString('\n')
-			+ " ; symbole = VT\n"); // VT = saut de ligne
+		ecrivainFichier.write("codeHuffman = " + codeHuffman 
+				+ " ; encode = " + Integer.toBinaryString('\n')
+				+ " ; symbole = VT\n"); // VT = saut de ligne
 	    } else if (racine.getCaractere() == ' ') {
-		ecrivainFichier.write("codeHuffman = " + codeHuffman + " ; encode = " + Integer.toBinaryString(' ')
-			+ " ; symbole = CF\n"); // CF = espace
+		ecrivainFichier.write("codeHuffman = " + codeHuffman 
+				+ " ; encode = " + Integer.toBinaryString(' ')
+				+ " ; symbole = CF\n"); // CF = espace
 	    } else {
 		ecrivainFichier.write(
-			"codeHuffman = " + codeHuffman + " ; encode = " + Integer.toBinaryString(racine.getCaractere())
+			"codeHuffman = " + codeHuffman + " ; encode = " 
+				+ Integer.toBinaryString(racine.getCaractere())
 				+ " ; symbole = " + racine.getCaractere() + "\n");
 	    }
 	}
-	parcourirArbreHuffman(racine.getGauche(), ecrivainFichier, codeHuffman + "0");
-	parcourirArbreHuffman(racine.getDroite(), ecrivainFichier, codeHuffman + "1");
+	parcourirArbreHuffman(racine.getGauche(), ecrivainFichier, codeHuffman 
+									+ "0");
+	parcourirArbreHuffman(racine.getDroite(), ecrivainFichier, codeHuffman 
+									+ "1");
 
     }
 
     /**
      * Restaure l'arbre de Huffman à partir d'un fichier.
      *
-     * @param nomFichier Le nom du fichier contenant l'arbre de Huffman.
+     * @param nomFichier Le nom du fichier contenant l'arbre de 
+     * 			 Huffman.
      * @return Un tableau de dictionnaire Huffman.
-     * @throws IOException Si une erreur d'entrée ou de sortie survient.
+     * @throws IOException Si une erreur d'entrée ou de sortie 
+     * 			   survient.
      */
-    public static Object[][] restaurerArbreHuffman(String nomFichier) throws IOException {
+    public static Object[][] restaurerArbreHuffman(String nomFichier) 
+	    						throws IOException {
 	List<Object[]> dictionnaire = new ArrayList<>();
 
-	try (BufferedReader lecteur = new BufferedReader(new FileReader(nomFichier))) {
+	try (BufferedReader lecteur 
+			= new BufferedReader(new FileReader(nomFichier))) {
 	    String ligne;
 	    while ((ligne = lecteur.readLine()) != null) {
 
@@ -96,7 +109,8 @@ public class GestionArbreHuffman {
     }
 
     /**
-     * Décode le symbole en fonction du caractère représenté dans le fichier.
+     * Décode le symbole en fonction du caractère représenté dans le 
+     * fichier.
      *
      * @param caractere Le caractère sous forme de chaîne.
      * @return Le caractère décodé.

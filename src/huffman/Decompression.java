@@ -16,10 +16,12 @@ public class Decompression {
      * Décompresse des fichier à partir de l'encodage Huffman
      *
      * @param FichierCompresse fichier à décompresser
-     * @param dictionnaire     les caractères avec leurs encodage Huffman
+     * @param dictionnaire     les caractères avec leurs encodage 
+     * 			       Huffman
      * @return le texte décompressé
      */
-    public static String decompresser(String FichierCompresse, Object[][] dictionnaire) {
+    public static String decompresser(String FichierCompresse,
+	    Object[][] dictionnaire) {
 	String texteDecompresse = "";
 	String texteBinaire = null;
 	String temp = "";

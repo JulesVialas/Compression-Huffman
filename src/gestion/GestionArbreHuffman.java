@@ -37,30 +37,31 @@ public class GestionArbreHuffman {
     /**
      * Parcours l'arbre de Huffman et écrit chaque noeud dans le fichier.
      *
-     * @param noeud           noeud actuel de l'arbre.
+     * @param racine          noeud actuel de l'arbre.
      * @param ecrivainFichier ecrivain du contenu du dictionnaire.
      * @param codeHuffman     code Huffman pour le noeud actuel.
      * @throws IOException Si une erreur d'entrée ou de sortie survient.
      */
-    private static void parcourirArbreHuffman(Noeud noeud, BufferedWriter ecrivainFichier, String codeHuffman)
+    private static void parcourirArbreHuffman(Noeud racine, BufferedWriter ecrivainFichier, String codeHuffman)
 	    throws IOException {
-	if (noeud == null) {
+	if (racine == null) {
 	    return;
 	}
-	if (noeud.getGauche() == null && noeud.getDroite() == null) {
-	    if (noeud.getCaractere() == '\n') {
+	if (racine.getGauche() == null && racine.getDroite() == null) {
+	    if (racine.getCaractere() == '\n') {
 		ecrivainFichier.write("codeHuffman = " + codeHuffman + " ; encode = " + Integer.toBinaryString('\n')
 			+ " ; symbole = VT\n"); // VT = saut de ligne
-	    } else if (noeud.getCaractere() == ' ') {
+	    } else if (racine.getCaractere() == ' ') {
 		ecrivainFichier.write("codeHuffman = " + codeHuffman + " ; encode = " + Integer.toBinaryString(' ')
 			+ " ; symbole = CF\n"); // CF = espace
 	    } else {
-		ecrivainFichier.write("codeHuffman = " + codeHuffman + " ; encode = "
-			+ Integer.toBinaryString(noeud.getCaractere()) + " ; symbole = " + noeud.getCaractere() + "\n");
+		ecrivainFichier.write(
+			"codeHuffman = " + codeHuffman + " ; encode = " + Integer.toBinaryString(racine.getCaractere())
+				+ " ; symbole = " + racine.getCaractere() + "\n");
 	    }
 	}
-	parcourirArbreHuffman(noeud.getGauche(), ecrivainFichier, codeHuffman + "0");
-	parcourirArbreHuffman(noeud.getDroite(), ecrivainFichier, codeHuffman + "1");
+	parcourirArbreHuffman(racine.getGauche(), ecrivainFichier, codeHuffman + "0");
+	parcourirArbreHuffman(racine.getDroite(), ecrivainFichier, codeHuffman + "1");
 
     }
 

@@ -30,11 +30,11 @@ class GestionArbreHuffmanTest {
 	Noeud feuilleA = new Noeud('a', 5);
 	Noeud feuilleB = new Noeud('b', 9);
 
-	Noeud noeudInterne = new Noeud('\0', feuilleA.getFrequence() + feuilleB.getFrequence());
-	noeudInterne.setGauche(feuilleA);
-	noeudInterne.setDroite(feuilleB);
+	Noeud ArbreHuffmanInterne = new Noeud('\0', feuilleA.getFrequence() + feuilleB.getFrequence());
+	ArbreHuffmanInterne.setGauche(feuilleA);
+	ArbreHuffmanInterne.setDroite(feuilleB);
 
-	racine = noeudInterne;
+	racine = ArbreHuffmanInterne;
     }
 
     @AfterEach

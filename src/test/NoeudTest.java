@@ -5,38 +5,67 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import huffman.CompterOccurrences;
 import huffman.Noeud;
+import huffman.Occurrence;
 
 class NoeudTest {
 
+    private static final List<Occurrence> OCCURRENCES = CompterOccurrences.compter("Bonjour a tous");
+
+    private static final List<Occurrence> UNE_OCCURRENCE = CompterOccurrences.compter("aaaaa");
+
+    private static final List<Occurrence> OCCURRENCES_NON_REPETEES = CompterOccurrences.compter("abcdefghij");
+
+    private static final List<Occurrence> OCCURRENCES_EGALES = CompterOccurrences.compter("aabbccddee");
+
     @Test
-    void testNoeud() {
-	char caractere = 'a';
-	int frequence = 5;
-	Noeud noeud = new Noeud(caractere, frequence);
+    void testConstructionArbreHuffmanAvecOccurrencesRepetees() {
+	Noeud root1 = Noeud.constructionArbreHuffman(OCCURRENCES);
+	assertNotNull(root1);
+	assertTrue(estArbreHuffmanValide(root1));
+    }
 
-	assertEquals(caractere, noeud.getCaractere(), "Le caractère du " + "noeud doit être 'a'.");
-	assertEquals(frequence, noeud.getFrequence(), "La fréquence du " + "noeud doit être 5.");
+    @Test
+    void testConstructionArbreHuffmanAvecUneOccurrence() {
+	Noeud root2 = Noeud.constructionArbreHuffman(UNE_OCCURRENCE);
+	assertNotNull(root2);
+	assertTrue(estArbreHuffmanValide(root2));
+	assertEquals(root2.getCaractere(), 'a');
+	assertEquals(root2.getFrequence(), 5);
+	assertEquals(root2.getGauche(), null);
+	assertEquals(root2.getDroite(), null);
+    }
 
-	Noeud gauche = new Noeud('b', 2);
-	Noeud droite = new Noeud('c', 3);
-	noeud.setGauche(gauche);
-	noeud.setDroite(droite);
+    @Test
+    void testConstructionArbreHuffmanAvecOccurrencesNonRepetees() {
+	Noeud root4 = Noeud.constructionArbreHuffman(OCCURRENCES_NON_REPETEES);
+	assertNotNull(root4);
+	assertTrue(estArbreHuffmanValide(root4));
+    }
 
-	assertEquals(gauche, noeud.getGauche(), "Le noeud gauche doit être " + "défini correctement.");
-	assertEquals(droite, noeud.getDroite(), "Le noeud droit doit être " + "défini correctement.");
+    @Test
+    void testArbreHuffmanAvecOccurencesEgales() {
+	Noeud root = Noeud.constructionArbreHuffman(OCCURRENCES_EGALES);
+	assertNotNull(root);
+	assertTrue(estArbreHuffmanValide(root));
+    }
 
-	Noeud gaucheGauche = new Noeud('d', 1);
-	gauche.setGauche(gaucheGauche);
-	assertEquals(gaucheGauche, gauche.getGauche(),
-		"Le noeud gauche du " + "noeud gauche doit être défini correctement.");
-
-	Noeud droiteDroite = new Noeud('e', 1);
-	droite.setDroite(droiteDroite);
-	assertEquals(droiteDroite, droite.getDroite(),
-		"Le noeud droit du " + "noeud droit doit être défini correctement.");
+    private boolean estArbreHuffmanValide(Noeud noeud) {
+	if ((noeud == null) || (noeud.getGauche() == null && noeud.getDroite() == null)) {
+	    return true;
+	}
+	if (noeud.getGauche() != null && noeud.getDroite() != null) {
+	    return noeud.getFrequence() == (noeud.getGauche().getFrequence() + noeud.getDroite().getFrequence())
+		    && estArbreHuffmanValide(noeud.getGauche()) && estArbreHuffmanValide(noeud.getDroite());
+	}
+	return false;
     }
 }

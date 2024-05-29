@@ -15,8 +15,8 @@ public class Main extends Application {
 	    primaryStage.setTitle("Application Huffman");
 	    primaryStage.setScene(new Scene(root));
 	    primaryStage.show();
-	} catch (Exception erreur) {
-	    erreur.printStackTrace();
+	} catch (Exception e) {
+	    e.printStackTrace();
 	}
     }
 

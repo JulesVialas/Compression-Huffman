@@ -5,6 +5,10 @@
 
 package huffman;
 
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +19,7 @@ import java.util.List;
  */
 public class CompterOccurrences {
 
-    private static final int MAX_UNICODE = 1114112;
+    private static final int MAX_UTF8 = 1114112;
 
     /**
      * Compte les occurrences de chaque caractère dans un texte donné.
@@ -26,7 +30,8 @@ public class CompterOccurrences {
      */
     public static List<Occurrence> compter(String texte) {
 	verifierTexteValide(texte);
-	int[] tableauOccurrences = new int[MAX_UNICODE + 1];
+	estUtf8(texte);
+	int[] tableauOccurrences = new int[MAX_UTF8 + 1];
 	List<Occurrence> resultat = remplirListeOccurrences(texte, tableauOccurrences);
 	return trierParFrequence(resultat);
     }
@@ -40,6 +45,28 @@ public class CompterOccurrences {
     private static void verifierTexteValide(String texte) {
 	if (texte == null || texte.isEmpty()) {
 	    throw new IllegalArgumentException("Le texte est vide ou null");
+	}
+    }
+
+    /**
+     * Vérifie si le texte conforme à la norme utf-8.
+     *
+     * @param texte
+     * @return true si le texte ne contient pas de caractères non UTF-8 false si le
+     *         texte comporte des caractères non UTF-8
+     */
+
+    public static boolean estUtf8(String texte) {
+	CharsetDecoder verificateur = StandardCharsets.UTF_8.newDecoder();
+
+	byte[] octets = texte.getBytes(StandardCharsets.UTF_8);
+	ByteBuffer byteBuffer = ByteBuffer.wrap(octets);
+
+	try {
+	    CharBuffer charBuffer = verificateur.decode(byteBuffer);
+	    return true;
+	} catch (Exception erreur) {
+	    return false;
 	}
     }
 
@@ -59,7 +86,7 @@ public class CompterOccurrences {
 	}
 
 	List<Occurrence> liste = new ArrayList<>();
-	for (int rang = 0; rang <= MAX_UNICODE; rang++) {
+	for (int rang = 0; rang <= MAX_UTF8; rang++) {
 	    if (occurrences[rang] > 0) {
 		char caractere = (char) rang;
 		double frequence = (double) occurrences[rang] / longueurTexte;

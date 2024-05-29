@@ -7,7 +7,6 @@ import gestion.GestionArbreHuffman;
 import gestion.GestionFichierBinaire;
 import gestion.GestionFichierTexte;
 import huffman.Compression;
-import huffman.CompterOccurrences;
 import huffman.Decompression;
 import huffman.Noeud;
 import huffman.Occurrence;
@@ -16,12 +15,12 @@ public class Modele {
 
     public static List<Occurrence> compterOccurrences(String filePath) throws Exception {
 	String content = GestionFichierTexte.lireFichier(filePath);
-	return CompterOccurrences.compter(content);
+	return Occurrence.compter(content);
     }
 
     public void créerArbreHuffman(String filePath, String outputFilePath) throws Exception {
 	String content = GestionFichierTexte.lireFichier(filePath);
-	List<Occurrence> occurrences = CompterOccurrences.compter(content);
+	List<Occurrence> occurrences = Occurrence.compter(content);
 	Noeud racine = Noeud.constructionArbreHuffman(occurrences);
 	GestionArbreHuffman.sauvegardeArbreHuffman(racine, outputFilePath);
     }

@@ -64,28 +64,10 @@ public class Noeud {
     }
 
     /**
-     * Définit le noeud enfant gauche.
-     *
-     * @param gauche le noeud enfant gauche à définir
-     */
-    public void setGauche(Noeud gauche) {
-	this.gauche = gauche;
-    }
-
-    /**
      * @return le noeud enfant droit
      */
     public Noeud getDroite() {
 	return this.droite;
-    }
-
-    /**
-     * Définit le noeud enfant droit.
-     *
-     * @param droite le noeud enfant droit à définir
-     */
-    public void setDroite(Noeud droite) {
-	this.droite = droite;
     }
 
     /**

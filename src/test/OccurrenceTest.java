@@ -11,5 +11,4 @@ import huffman.Occurrence;
 
 public class OccurrenceTest {
 
-
 }

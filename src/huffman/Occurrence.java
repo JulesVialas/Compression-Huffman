@@ -61,6 +61,7 @@ public class Occurrence {
     public double getFrequence() {
 	return frequence;
     }
+
     private static final int MAX_UTF8 = 1114112;
 
     /**

@@ -9,22 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
-
-import huffman.CompterOccurrences;
 import huffman.Noeud;
 import huffman.Occurrence;
 
 class NoeudTest {
 
-    private static final List<Occurrence> OCCURRENCES = CompterOccurrences.compter("Bonjour a tous");
+    private static final List<Occurrence> OCCURRENCES = Occurrence.compter("Bonjour a tous");
 
-    private static final List<Occurrence> UNE_OCCURRENCE = CompterOccurrences.compter("aaaaa");
+    private static final List<Occurrence> UNE_OCCURRENCE = Occurrence.compter("aaaaa");
 
-    private static final List<Occurrence> OCCURRENCES_NON_REPETEES = CompterOccurrences.compter("abcdefghij");
+    private static final List<Occurrence> OCCURRENCES_NON_REPETEES = Occurrence.compter("abcdefghij");
 
-    private static final List<Occurrence> OCCURRENCES_EGALES = CompterOccurrences.compter("aabbccddee");
+    private static final List<Occurrence> OCCURRENCES_EGALES = Occurrence.compter("aabbccddee");
 
     @Test
     void testConstructionArbreHuffmanAvecOccurrencesRepetees() {

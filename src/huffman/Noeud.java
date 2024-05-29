@@ -64,15 +64,6 @@ public class Noeud {
     }
 
     /**
-     * Définit le noeud enfant gauche.
-     *
-     * @param gauche le noeud enfant gauche à définir
-     */
-    public void setGauche(Noeud gauche) {
-	this.gauche = gauche;
-    }
-
-    /**
      * @return le noeud enfant droit
      */
     public Noeud getDroite() {
@@ -80,6 +71,7 @@ public class Noeud {
     }
 
     /**
+<<<<<<< HEAD
      * Définit le noeud enfant droit.
      *
      * @param droite le noeud enfant droit à définir
@@ -91,6 +83,10 @@ public class Noeud {
     /**
      * Construit un arbre de Huffman à partir d'une liste 
      * d'occurrences de caractères.
+=======
+     * Construit un arbre de Huffman à partir d'une liste d'occurrences de
+     * caractères.
+>>>>>>> branch 'master' of https://github.com/JulesVialas/SAE-S2.02.git
      *
      * @param occurrences une liste d'objets où chaque élément est 
      *                    une occurrence représentée par un objet 

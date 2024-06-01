@@ -8,9 +8,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Noeud contient des méthodes pour construire un arbre de Huffman
- *  à partir des occurrences des caractères d'un fichier.
+ * Permet de créer un arbre de Huffman à partir des fréquences des
+ *  caractères d'un fichier.
+ * <p>
+ * L'arbre de Huffman est un arbre binaire utilisé en compression de
+ * données. Il associe les caractères les plus fréquents à des codes
+ * binaires courts et les caractères moins fréquents à 
+ * des codes binaires plus longs.
+ * </p>
+ * <p>
+ * Pour construire l'arbre, cette classe prend en entrée une liste
+ * des occurrences de chaque caractère dans le fichier, représentées
+ * par des paires de caractères et de fréquences.
+ * </p>
+ * <p>
+ * Les nœuds de l'arbre représentent soit des caractères, soit des
+ * combinaisons de caractères, tandis que les feuilles de l'arbre
+ * représentent les caractères eux-mêmes.
+ * </p>
+ * <p>
+ * Les méthodes fournies permettent d'accéder aux caractères,
+ * aux fréquences et aux nœuds enfants de chaque nœud de l'arbre.
+ * </p>
+ *  @author LOUBIERE Landry, MONTES Robin, SEHIL Amjed, VALAT Aurélien
+ *  et VIALAS Jules 
  */
+
 public class Noeud {
     private char caractere;
     private int frequence;

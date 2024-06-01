@@ -12,8 +12,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * La classe GestionFichierTexte fournit des méthodes pour lire et
- * écrire des fichiers texte.
+ * Fournit des méthodes pour lire et écrire des fichiers texte.
+ * <p>
+ * 
+ * Elle permet d'effectuer des opérations sur des fichiers
+ * texte, telles que la lecture du contenu d'un fichier ou l'écriture
+ * d'un nouveau contenu dans un fichier.
+ * </p>
+ * 
+ * <p>
+ * @author LOUBIERE Landry et VALAT Aurélien
+ * </p>
  */
 public class GestionFichierTexte {
 
@@ -48,7 +57,7 @@ public class GestionFichierTexte {
      *
      * @param contenu      le contenu à écrire dans le fichier
      * @param nomDeFichier le nom du fichier dans lequel écrire le 
-     * 			   contenu
+     *                     contenu
      */
     public static void ecrireFichier(String contenu, String nomDeFichier) {
 	BufferedWriter contenuFichier = null;

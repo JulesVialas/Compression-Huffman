@@ -9,8 +9,8 @@ import java.io.IOException;
 import gestion.GestionFichierBinaire;
 
 /**
- * <p>Permet de décompresser des fichiers encodés en utilisant
- * l'algorithme de Huffman.</p>
+ * Permet de décompresser des fichiers encodés en utilisant
+ * l'algorithme de Huffman.
  * <p>Les fichiers compressés sont décodés à l'aide d'un dictionnaire
  * de caractères et de leurs encodages Huffman correspondants.</p>
  * <p>Cette classe offre des méthodes pour lire le contenu 

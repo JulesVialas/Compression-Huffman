@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Permet de créer un arbre de Huffman à partir des fréquences des
- *  caractères d'un fichier.
+ * caractères d'un fichier.
  * <p>
  * L'arbre de Huffman est un arbre binaire utilisé en compression de
  * données. Il associe les caractères les plus fréquents à des codes

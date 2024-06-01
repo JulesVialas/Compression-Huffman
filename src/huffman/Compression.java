@@ -5,9 +5,17 @@
 package huffman;
 
 /**
- * Compression contient des méthodes pour compresser des chaînes de
- * caractères via le code Huffman obtenu lors de la construction 
- * de l'arbre Huffman
+ * Offre des outils pour compresser du texte en utilisant 
+ * l'algorithme de Huffman. Cet algorithme intelligent utilise
+ * la fréquence des lettres pour créer un code binaire compact.
+ * <p>
+ * Pour compresser, on utilise un arbre de Huffman construit à partir
+ * des fréquences des lettres dans le texte d'origine. 
+ * Ce code Huffman est ensuite utilisé pour convertir chaque lettre,
+ * en une séquence binaire.
+ * </p>
+ * @author LOUBIERE Landry, MONTES Robin, SEHIL Amjed, VALAT Aurélien
+ * et VIALAS Jules
  */
 public class Compression {
 

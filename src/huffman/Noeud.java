@@ -30,8 +30,8 @@ import java.util.List;
  * Les méthodes fournies permettent d'accéder aux caractères,
  * aux fréquences et aux nœuds enfants de chaque nœud de l'arbre.
  * </p>
- *  @author LOUBIERE Landry, MONTES Robin, SEHIL Amjed, VALAT Aurélien
- *  et VIALAS Jules 
+ * @author LOUBIERE Landry, MONTES Robin, SEHIL Amjed, VALAT Aurélien
+ * et VIALAS Jules 
  */
 
 public class Noeud {

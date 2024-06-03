@@ -12,18 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Fournit des méthodes pour lire et écrire des fichiers texte.
- * <p>
- *
- * Elle permet d'effectuer des opérations sur des fichiers texte,
- * telles que la lecture du contenu d'un fichier ou l'écriture d'un
- * nouveau contenu dans un fichier.
- * </p>
- *
- * <p>
- *
- * @author LOUBIERE Landry et VALAT Aurélien
- *         </p>
+ * La classe GestionFichierTexte fournit des méthodes pour lire et
+ * écrire des fichiers texte.
  */
 public class GestionFichierTexte {
 
@@ -31,9 +21,9 @@ public class GestionFichierTexte {
      * Lit le contenu d'un fichier texte et retourne ce contenu sous forme
      * de chaîne de caractères.
      *
-     * @param cheminFichier Le chemin du fichier à lire
-     * @return le contenu du fichier sous forme de chaîne de caractères
-     * @throws IOException si une erreur d'entrée/sortie se produit
+     * @param cheminFichier Le chemin du fichier à lire.
+     * @return Le contenu du fichier sous forme de chaîne de caractères.
+     * @throws IOException Si une erreur d'entrée/sortie se produit.
      */
     public static String lireFichier(String cheminFichier) throws IOException {
         StringBuilder contenuBuilder = new StringBuilder();
@@ -55,24 +45,16 @@ public class GestionFichierTexte {
     /**
      * Écrit une chaîne de caractères dans un fichier texte.
      *
-     * @param contenu      le contenu à écrire dans le fichier
-     * @param nomDeFichier le nom du fichier dans lequel écrire le contenu
+     * @param contenu      Le contenu à écrire dans le fichier.
+     * @param nomDeFichier Le nom du fichier dans lequel écrire le
+     *                     contenu.
      */
     public static void ecrireFichier(String contenu, String nomDeFichier) {
-        BufferedWriter contenuFichier = null;
-        try {
-            contenuFichier = new BufferedWriter(new FileWriter(nomDeFichier));
+        try (BufferedWriter contenuFichier = new BufferedWriter(
+                new FileWriter(nomDeFichier))) {
             contenuFichier.write(contenu);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (contenuFichier != null) {
-                    contenuFichier.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

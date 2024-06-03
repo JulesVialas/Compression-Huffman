@@ -5,27 +5,28 @@
 package huffman;
 
 /**
- * Offre des outils pour compresser du texte en utilisant l'algorithme
- * de Huffman. Cet algorithme intelligent utilise la fréquence des
- * lettres pour créer un code binaire compact.
+ * Cette classe offre des outils pour compresser du texte en utilisant
+ * l'algorithme de Huffman. L'algorithme de Huffman utilise la
+ * fréquence des lettres pour créer un code binaire compact.
  * <p>
  * Pour compresser, on utilise un arbre de Huffman construit à partir
  * des fréquences des lettres dans le texte d'origine. Ce code Huffman
- * est ensuite utilisé pour convertir chaque lettre, en une séquence
+ * est ensuite utilisé pour convertir chaque lettre en une séquence
  * binaire.
  * </p>
  *
- * @author LOUBIERE Landry, MONTES Robin, SEHIL Amjed, VALAT Aurélien
- *         et VIALAS Jules
+ * @author LOUBIERE Landry MONTES Robin SEHIL Amjed VALAT Aurélien
+ *         VIALAS Jules
  */
 public class Compression {
 
     /**
-     * Compresse un fichier grâce à son code Huffman
+     * Compresse un texte en utilisant un arbre de Huffman.
      *
-     * @param texte        chaîne de caractère à compresser
-     * @param dictionnaire arbre de Huffman du fichier donnée
-     * @return texte compressé
+     * @param texte        Le texte à compresser.
+     * @param dictionnaire L'arbre de Huffman utilisé pour la compression.
+     * @return Le texte compressé sous forme de chaîne binaire.
+     * @throws IllegalArgumentException Si le texte est vide ou null.
      */
     public static String compresserTexte(String texte,
             Object[][] dictionnaire) {
@@ -33,8 +34,8 @@ public class Compression {
             throw new IllegalArgumentException("Le texte est vide ou null");
         }
         StringBuilder codeBinaire = new StringBuilder();
-        for (int rang = 0; rang < texte.length(); rang++) {
-            char caractere = texte.charAt(rang);
+        for (int i = 0; i < texte.length(); i++) {
+            char caractere = texte.charAt(i);
             String codeHuffman = trouverCodeHuffman(caractere, dictionnaire);
             codeBinaire.append(codeHuffman);
         }
@@ -42,12 +43,12 @@ public class Compression {
     }
 
     /**
-     * Refonte de l'arbre Huffman pour effectuer la compression
+     * Trouve le code Huffman d'un caractère dans un dictionnaire.
      *
-     * @param caractere    caractère dont on veut le code huffman
-     * @param dictionnaire
-     * @return Si le caractère est trouvé dans le dictionnaire le code
-     *         Huffman. Sinon rien n'est retourné.
+     * @param caractere    Le caractère dont on veut le code Huffman.
+     * @param dictionnaire Le dictionnaire contenant les codes Huffman.
+     * @return Le code Huffman du caractère, ou une chaîne vide si le
+     *         caractère n'est pas trouvé.
      */
     public static String trouverCodeHuffman(char caractere,
             Object[][] dictionnaire) {

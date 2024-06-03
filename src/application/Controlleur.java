@@ -78,10 +78,14 @@ public class Controlleur {
     private static final String DECOMPRESSION_REUSSIE = "Décompression réussie";
 
     /** Format du message affichant les détails de la compression. */
-    private static final String MESSAGE_TAUX_COMPRESSION = "Taille du fichier initial : %d bytes\nTaille du fichier compressé : %d bytes\nTemps de compression : %d ms\nTaux de compression : %.2f";
+    private static final String MESSAGE_TAUX_COMPRESSION = "Taille du fichier initial : %d bytes\nTaille du fichier"
+            + " compressé : %d bytes\nTemps de compression : %d ms\n"
+            + "Taux de compression : %.2f";
 
     /** Format du message affichant les détails de la décompression. */
-    private static final String MESSAGE_TAUX_DECOMPRESSION = "Taille du fichier compressé : %d bytes\nTaille du fichier décompressé : %d bytes\nTemps de décompression : %d ms\nTaux de décompression : %.2f";
+    private static final String MESSAGE_TAUX_DECOMPRESSION = "Taille du fichier compressé : %d bytes\nTaille du fichier"
+            + " décompressé : %d bytes\nTemps de décompression : %d ms"
+            + "\nTaux de décompression : %.2f";
 
     @FXML
     private TableView<Occurrence> tableView;
@@ -225,9 +229,8 @@ public class Controlleur {
 
                         double tauxDecompression = modele
                                 .calculerTauxCompression(
-                                        fichier.getAbsolutePath(),
-                                        fichierEnregistrement
-                                                .getAbsolutePath());
+                                        fichierEnregistrement.getAbsolutePath(),
+                                        fichier.getAbsolutePath());
                         afficherInfosDecompression(fichier,
                                 fichierEnregistrement, duration,
                                 tauxDecompression);

@@ -15,27 +15,20 @@ import java.util.List;
 import huffman.Noeud;
 
 /**
- * L'arbre Huffman doit être écrit dans un fichier pour être sauvegardé
- * sous la forme d'un dictionnaire. Pour ce faire il faut en premier lieu 
- * enregistrer l'arbre de huffman dans un fichier txt sous la forme:
- * codeHuffman = 00 ; encode = 01100101 ; symbole = e
+ * L'arbre Huffman doit être écrit dans un fichier pour être
+ * sauvegardé sous la forme d'un dictionnaire. Pour ce faire il faut
+ * en premier lieu enregistrer l'arbre de huffman dans un fichier txt
+ * sous la forme: codeHuffman = 00 ; encode = 01100101 ; symbole = e
  * Voici à quoi correspondent ces trois parties:
  * <ul>
- *	<li>
- *	codeHuffman étant le nouveau encodage donné par l'arbre;
- *	</li>
- *	<li>
- *	encode étant l'encodage UTF8 du caractère;
- *	</li>
- *	<li>
- *	symbole étant le caractère du fichier
- *	</li>
+ * <li>codeHuffman étant le nouveau encodage donné par l'arbre;</li>
+ * <li>encode étant l'encodage UTF8 du caractère;</li>
+ * <li>symbole étant le caractère du fichier</li>
  * </ul>
- * L'arbre huffman doit aussi mettre en évidence les retours à la ligne
- * et les espaces pour ce faire on remplace les caractères espace par CF
- * et les sauts de lignes par VT.
- * Finalement nous récupérons les données du fichier dictionnaire dans un 
- * tableau.
+ * L'arbre huffman doit aussi mettre en évidence les retours à la
+ * ligne et les espaces pour ce faire on remplace les caractères
+ * espace par CF et les sauts de lignes par VT. Finalement nous
+ * récupérons les données du fichier dictionnaire dans un tableau.
  */
 public class GestionArbreHuffman {
 

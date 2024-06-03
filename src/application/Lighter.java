@@ -1,3 +1,7 @@
+/*
+ * Lighter.java                                          3 juin 2024
+ * IUT de Rodez, pas de copyright.
+ */
 package application;
 
 import javafx.application.Application;

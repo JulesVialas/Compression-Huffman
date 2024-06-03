@@ -1,3 +1,7 @@
+/*
+ * OccurrenceTest.java                                            22 avril 2024
+ * IUT de Rodez, pas de copyright.
+ */
 package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

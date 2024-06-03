@@ -1,5 +1,5 @@
 /*
- * DecompressionTest.java                                            02 mai 2024
+ * DecompressionTest.java                                            22 mai 2024
  * IUT de Rodez, pas de copyright.
  */
 package test;

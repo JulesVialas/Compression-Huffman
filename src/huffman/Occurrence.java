@@ -1,5 +1,5 @@
 /*
- * Occurrence.java                                            TODO DATE
+ * Occurrence.java                                            22 avril 2024
  * IUT de Rodez, pas de copyright.
  */
 package huffman;

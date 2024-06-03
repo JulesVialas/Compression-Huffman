@@ -1,5 +1,5 @@
 /*
- * GestionFichierTexteTest.java                                            22 avril 2024
+ * GestionFichierTexteTest.java                                   22 avril 2024
  * IUT de Rodez, pas de copyright.
  */
 package test;

@@ -13,6 +13,9 @@ import java.io.IOException;
 /**
  * GestionFichierBinaire contient des méthodes pour lire et écrire des
  * fichiers binaires contenant des chaînes de bits.
+ *
+ * @author Jules Vialas, Aurélien Valat, Robin Montes, Amjed Sehil,
+ *         Landry Loubière
  */
 public class GestionFichierBinaire {
 

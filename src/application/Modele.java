@@ -20,6 +20,8 @@ import huffman.Occurrence;
  * compression et de décompression de fichiers en utilisant
  * l'algorithme de Huffman. Elle gère également le calcul des
  * occurrences de caractères et la création d'arbres de Huffman.
+ *
+ * @author Jules Vialas
  */
 public class Modele {
 

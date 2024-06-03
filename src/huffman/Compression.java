@@ -15,8 +15,8 @@ package huffman;
  * binaire.
  * </p>
  *
- * @author LOUBIERE Landry MONTES Robin SEHIL Amjed VALAT Aurélien
- *         VIALAS Jules
+ * @author Jules Vialas, Robin Montes, Aurélien Valat, Landry
+ *         Loubière, Amjed Sehil
  */
 public class Compression {
 

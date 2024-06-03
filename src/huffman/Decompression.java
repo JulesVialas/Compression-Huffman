@@ -21,7 +21,7 @@ import gestion.GestionFichierBinaire;
  * puis retourner le texte décompressé.
  * </p>
  *
- * @author LOUBIERE Landry, VIALAS Jules, SEHIL Amjed
+ * @author Jules Vialas, Amjed Sehil, Landry Loubière
  */
 public class Decompression {
     /**

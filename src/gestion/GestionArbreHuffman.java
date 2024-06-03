@@ -29,6 +29,8 @@ import huffman.Noeud;
  * ligne et les espaces pour ce faire on remplace les caractères
  * espace par CF et les sauts de lignes par VT. Finalement nous
  * récupérons les données du fichier dictionnaire dans un tableau.
+ *
+ * @author Jules Vialas, Aurélien Valat
  */
 public class GestionArbreHuffman {
 

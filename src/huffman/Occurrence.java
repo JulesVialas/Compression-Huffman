@@ -16,6 +16,9 @@ import java.util.List;
  * contexte donné. Elle encapsule les informations relatives à ce
  * caractère, à savoir le caractère lui-même, le nombre d'occurrences
  * de ce caractère et sa fréquence dans le contexte.
+ *
+ * @author Jules Vialas, Robin Montes, Aurélien Valat, Landry
+ *         Loubière, Amjed Sehil
  */
 public class Occurrence {
     private final char caractere;

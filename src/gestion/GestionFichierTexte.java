@@ -14,6 +14,8 @@ import java.io.IOException;
 /**
  * La classe GestionFichierTexte fournit des méthodes pour lire et
  * écrire des fichiers texte.
+ *
+ * @author Aurélien Valat, Landry Loubière
  */
 public class GestionFichierTexte {
 

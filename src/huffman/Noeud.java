@@ -31,8 +31,8 @@ import java.util.List;
  * fréquences et aux nœuds enfants de chaque nœud de l'arbre.
  * </p>
  *
- * @author LOUBIERE Landry, MONTES Robin, SEHIL Amjed, VALAT Aurélien
- *         et VIALAS Jules
+ * @author Jules Vialas, Robin Montes, Aurélien Valat, Landry
+ *         Loubière, Amjed Sehil
  */
 
 public class Noeud {
@@ -101,6 +101,15 @@ public class Noeud {
      */
     public void setDroite(Noeud droite) {
         this.droite = droite;
+    }
+
+    /**
+     * Définit le noeud enfant gauche.
+     *
+     * @param gauche le noeud enfant gauche à définir
+     */
+    public void setGauche(Noeud gauche) {
+        this.gauche = gauche;
     }
 
     /**

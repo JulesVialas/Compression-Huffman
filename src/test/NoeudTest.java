@@ -15,20 +15,31 @@ import org.junit.jupiter.api.Test;
 import huffman.Noeud;
 import huffman.Occurrence;
 
+/**
+ * La classe NoeudTest contient les tests unitaires pour la classe
+ * Noeud. Elle vérifie la construction de l'arbre de Huffman à partir
+ * des occurrences des caractères.
+ *
+ * @author Jules Vialas, Robin Montes, Aurélien Valat, Landry
+ *         Loubière, Amjed Sehil
+ */
 class NoeudTest {
 
+    /** Les occurrences de caractères à utiliser pour les tests. */
     private static final List<Occurrence> OCCURRENCES = Occurrence
             .compter("Bonjour a tous");
-
     private static final List<Occurrence> UNE_OCCURRENCE = Occurrence
             .compter("aaaaa");
-
     private static final List<Occurrence> OCCURRENCES_NON_REPETEES = Occurrence
             .compter("abcdefghij");
-
     private static final List<Occurrence> OCCURRENCES_EGALES = Occurrence
             .compter("aabbccddee");
 
+    /**
+     * Test unitaire pour la construction de l'arbre de Huffman avec des
+     * occurrences répétées. Vérifie que l'arbre de Huffman construit est
+     * valide.
+     */
     @Test
     void testConstructionArbreHuffmanAvecOccurrencesRepetees() {
         Noeud root1 = Noeud.constructionArbreHuffman(OCCURRENCES);
@@ -36,6 +47,12 @@ class NoeudTest {
         assertTrue(estArbreHuffmanValide(root1));
     }
 
+    /**
+     * Test unitaire pour la construction de l'arbre de Huffman avec une
+     * seule occurrence. Vérifie que l'arbre de Huffman construit est
+     * valide et qu'il contient uniquement un nœud avec la bonne
+     * occurrence.
+     */
     @Test
     void testConstructionArbreHuffmanAvecUneOccurrence() {
         Noeud root2 = Noeud.constructionArbreHuffman(UNE_OCCURRENCE);
@@ -47,6 +64,11 @@ class NoeudTest {
         assertEquals(root2.getDroite(), null);
     }
 
+    /**
+     * Test unitaire pour la construction de l'arbre de Huffman avec des
+     * occurrences non répétées. Vérifie que l'arbre de Huffman construit
+     * est valide.
+     */
     @Test
     void testConstructionArbreHuffmanAvecOccurrencesNonRepetees() {
         Noeud root4 = Noeud.constructionArbreHuffman(OCCURRENCES_NON_REPETEES);
@@ -54,6 +76,11 @@ class NoeudTest {
         assertTrue(estArbreHuffmanValide(root4));
     }
 
+    /**
+     * Test unitaire pour la construction de l'arbre de Huffman avec des
+     * occurrences égales. Vérifie que l'arbre de Huffman construit est
+     * valide.
+     */
     @Test
     void testArbreHuffmanAvecOccurencesEgales() {
         Noeud root = Noeud.constructionArbreHuffman(OCCURRENCES_EGALES);
@@ -61,6 +88,12 @@ class NoeudTest {
         assertTrue(estArbreHuffmanValide(root));
     }
 
+    /**
+     * Vérifie si l'arbre de Huffman est valide.
+     *
+     * @param noeud le nœud racine de l'arbre à vérifier
+     * @return true si l'arbre est valide, false sinon
+     */
     private boolean estArbreHuffmanValide(Noeud noeud) {
         if ((noeud == null)
                 || (noeud.getGauche() == null && noeud.getDroite() == null)) {

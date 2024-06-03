@@ -18,6 +18,9 @@ import huffman.Compression;
  * Les tests incluent la compression de texte, la gestion des cas
  * d'erreur, et la recherche de codes Huffman pour les caractères.
  * </p>
+ *
+ * @author Jules Vialas, Robin Montes, Aurélien Valat, Landry
+ *         Loubière, Amjed Sehil
  */
 class CompressionTest {
 

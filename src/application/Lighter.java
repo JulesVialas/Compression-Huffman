@@ -14,6 +14,8 @@ import javafx.stage.Stage;
  * La classe Main est le point d'entrée de l'application JavaFX. Elle
  * charge et affiche l'interface utilisateur définie dans le fichier
  * FXML.
+ *
+ * @author Jules Vialas
  */
 public class Lighter extends Application {
 

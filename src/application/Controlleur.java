@@ -36,6 +36,8 @@ import javafx.stage.FileChooser;
  * <li>Décompresser un fichier binaire en utilisant un dictionnaire
  * Huffman</li>
  * </ul>
+ *
+ * @author Jules Vialas
  */
 public class Controlleur {
 

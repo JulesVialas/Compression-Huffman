@@ -95,7 +95,7 @@ public class Noeud {
     }
 
     /**
-     * <<<<<<< HEAD Définit le noeud enfant droit.
+     * Définit le noeud enfant droit.
      *
      * @param droite le noeud enfant droit à définir
      */
@@ -105,9 +105,8 @@ public class Noeud {
 
     /**
      * Construit un arbre de Huffman à partir d'une liste d'occurrences de
-     * caractères. ======= Construit un arbre de Huffman à partir d'une
-     * liste d'occurrences de caractères. >>>>>>> branch 'master' of
-     * https://github.com/JulesVialas/SAE-S2.02.git
+     * caractères. Construit un arbre de Huffman à partir d'une liste
+     * d'occurrences de caractères.
      *
      * @param occurrences une liste d'objets où chaque élément est une
      *                    occurrence représentée par un objet Occurrence

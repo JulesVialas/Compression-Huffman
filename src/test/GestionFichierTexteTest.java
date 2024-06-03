@@ -25,33 +25,35 @@ class GestionFichierTexteTest {
 
     @BeforeEach
     void setUp() throws IOException {
-	Files.write(Paths.get(TEMP_FILE_PATH), FILE_CONTENT.getBytes());
+        Files.write(Paths.get(TEMP_FILE_PATH), FILE_CONTENT.getBytes());
     }
 
     @AfterEach
     void tearDown() throws IOException {
-	Files.deleteIfExists(Paths.get(TEMP_FILE_PATH));
+        Files.deleteIfExists(Paths.get(TEMP_FILE_PATH));
     }
 
     @Test
     void testLireFichier() throws IOException {
-	String contenu = GestionFichierTexte.lireFichier(TEMP_FILE_PATH);
-	assertEquals(FILE_CONTENT, contenu, "Le contenu lu ne correspond pas " + "au contenu attendu.");
+        String contenu = GestionFichierTexte.lireFichier(TEMP_FILE_PATH);
+        assertEquals(FILE_CONTENT, contenu,
+                "Le contenu lu ne correspond pas " + "au contenu attendu.");
     }
 
     @Test
     void testEcrireFichier() throws IOException {
-	String nouveauContenu = "Nouveau Contenu\nPour Test";
-	String nouveauFichierPath = "nouveauTestFile.txt";
+        String nouveauContenu = "Nouveau Contenu\nPour Test";
+        String nouveauFichierPath = "nouveauTestFile.txt";
 
-	GestionFichierTexte.ecrireFichier(nouveauContenu, nouveauFichierPath);
+        GestionFichierTexte.ecrireFichier(nouveauContenu, nouveauFichierPath);
 
-	File nouveauFichier = new File(nouveauFichierPath);
-	assertTrue(nouveauFichier.exists(), "Le fichier devrait exister.");
+        File nouveauFichier = new File(nouveauFichierPath);
+        assertTrue(nouveauFichier.exists(), "Le fichier devrait exister.");
 
-	String contenuLu = GestionFichierTexte.lireFichier(nouveauFichierPath);
-	assertEquals(nouveauContenu, contenuLu, "Le contenu du fichier ne " + "correspond pas au contenu écrit.");
+        String contenuLu = GestionFichierTexte.lireFichier(nouveauFichierPath);
+        assertEquals(nouveauContenu, contenuLu, "Le contenu du fichier ne "
+                + "correspond pas au contenu écrit.");
 
-	Files.deleteIfExists(Paths.get(nouveauFichierPath));
+        Files.deleteIfExists(Paths.get(nouveauFichierPath));
     }
 }

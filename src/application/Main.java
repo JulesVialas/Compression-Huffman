@@ -10,17 +10,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-	try {
-	    Parent root = FXMLLoader.load(getClass().getResource("Vue.fxml"));
-	    primaryStage.setTitle("Application Huffman");
-	    primaryStage.setScene(new Scene(root));
-	    primaryStage.show();
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Vue.fxml"));
+            primaryStage.setTitle("Application Huffman");
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
-	launch(args);
+        launch(args);
     }
 }

@@ -13,37 +13,41 @@ import huffman.Occurrence;
 
 public class Modele {
 
-    public static List<Occurrence> compterOccurrences(String filePath) throws Exception {
-	String content = GestionFichierTexte.lireFichier(filePath);
-	return Occurrence.compter(content);
+    public static List<Occurrence> compterOccurrences(String filePath)
+            throws Exception {
+        String content = GestionFichierTexte.lireFichier(filePath);
+        return Occurrence.compter(content);
     }
 
-    public void créerArbreHuffman(String filePath, String outputFilePath) throws Exception {
-	String content = GestionFichierTexte.lireFichier(filePath);
-	List<Occurrence> occurrences = Occurrence.compter(content);
-	Noeud racine = Noeud.constructionArbreHuffman(occurrences);
-	GestionArbreHuffman.sauvegardeArbreHuffman(racine, outputFilePath);
+    public void créerArbreHuffman(String filePath, String outputFilePath)
+            throws Exception {
+        String content = GestionFichierTexte.lireFichier(filePath);
+        List<Occurrence> occurrences = Occurrence.compter(content);
+        Noeud racine = Noeud.constructionArbreHuffman(occurrences);
+        GestionArbreHuffman.sauvegardeArbreHuffman(racine, outputFilePath);
     }
 
-    public void compresserFichier(String inputFilePath, String dictionaryPath, String outputFilePath) throws Exception {
-	String content = GestionFichierTexte.lireFichier(inputFilePath);
-	String compressedText = Compression.compresserTexte(content,
-		GestionArbreHuffman.restaurerArbreHuffman(dictionaryPath));
-	GestionFichierBinaire.ecriture(compressedText, outputFilePath);
+    public void compresserFichier(String inputFilePath, String dictionaryPath,
+            String outputFilePath) throws Exception {
+        String content = GestionFichierTexte.lireFichier(inputFilePath);
+        String compressedText = Compression.compresserTexte(content,
+                GestionArbreHuffman.restaurerArbreHuffman(dictionaryPath));
+        GestionFichierBinaire.ecriture(compressedText, outputFilePath);
     }
 
-    public void decompresserFichier(String inputFilePath, String dictionaryPath, String outputFilePath)
-	    throws Exception {
-	String decompressedText = Decompression.decompresser(inputFilePath,
-		GestionArbreHuffman.restaurerArbreHuffman(dictionaryPath));
-	GestionFichierTexte.ecrireFichier(decompressedText, outputFilePath);
+    public void decompresserFichier(String inputFilePath, String dictionaryPath,
+            String outputFilePath) throws Exception {
+        String decompressedText = Decompression.decompresser(inputFilePath,
+                GestionArbreHuffman.restaurerArbreHuffman(dictionaryPath));
+        GestionFichierTexte.ecrireFichier(decompressedText, outputFilePath);
     }
 
-    public double calculerTauxCompression(String originalFilePath, String compressedFilePath) {
-	File originalFile = new File(originalFilePath);
-	File compressedFile = new File(compressedFilePath);
-	double originalSize = originalFile.length();
-	double compressedSize = compressedFile.length();
-	return originalSize / compressedSize;
+    public double calculerTauxCompression(String originalFilePath,
+            String compressedFilePath) {
+        File originalFile = new File(originalFilePath);
+        File compressedFile = new File(compressedFilePath);
+        double originalSize = originalFile.length();
+        double compressedSize = compressedFile.length();
+        return originalSize / compressedSize;
     }
 }
